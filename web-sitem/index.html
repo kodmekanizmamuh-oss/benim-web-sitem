@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Satış Sayfası</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <h1>PDF Satış</h1>
+            <p>Dijital ürününüze hemen sahip olun!</p>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <h2>Profesyonel PDF Ürünümüz</h2>
+            <p>Bilgilendirici, kaliteli ve tamamen dijital ürünümüzü hemen satın alın.</p>
+            
+            <a href="pdf/ürün.pdf" download class="btn">📥 PDF'yi İndir</a>
+
+            <button class="iban-btn" onclick="copyIBAN()">💳 IBAN ile Ödeme Yap</button>
+            <p class="note">Ödemenizi yaptıktan sonra lütfen bize bilgi veriniz.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Tüm Hakları Saklıdır. | Güvenli Dijital Satış</p>
+    </footer>
+
+    <script>
+        function copyIBAN() {
+            const iban = "TR980006701000000022363236"; 
+            navigator.clipboard.writeText(iban).then(() => {
+                alert("IBAN kopyalandı: " + iban);
+            });
+        }
+    </script>
+</body>
+</html>
