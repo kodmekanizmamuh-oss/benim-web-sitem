@@ -1,103 +1,185 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Ders Notları & PDF Satış Sitesi</title>
+  <title>Kod Mekanizması</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
-    header { background: linear-gradient(90deg, #4e54c8, #8f94fb); color: white; padding: 15px; text-align: center; font-size: 22px; font-weight: bold; }
-    nav { background: #222; padding: 10px; text-align: center; }
-    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    section { padding: 20px; }
-    h2 { color: #333; }
-    .card { background: white; margin: 10px 0; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .btn { display: inline-block; padding: 10px 15px; background: #6a11cb; color: white; border-radius: 6px; text-decoration: none; }
-    footer { background: #333; color: white; text-align: center; padding: 15px; margin-top: 30px; }
-    #hiddenPanel { display: none; margin-top: 20px; padding: 20px; background: #fff3cd; border: 1px solid #ffeeba; border-radius: 8px; }
-    input { padding: 8px; margin: 5px; border-radius: 6px; border: 1px solid #ccc; }
-    #ekleDurum { margin-top: 10px; font-weight: bold; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+    }
+    header {
+      background: rgba(0,0,0,0.6);
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px;
+      background: rgba(255,255,255,0.1);
+    }
+    nav button {
+      background: #ff9800;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    nav button:hover {
+      background: #e68900;
+    }
+    section {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .iban-box {
+      background: white;
+      color: black;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      text-align: center;
+    }
+    .iban-box button {
+      margin-top: 10px;
+      background: #2196F3;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .lesson {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+    .hidden { display: none; }
+    footer {
+      background: rgba(0,0,0,0.7);
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    footer a {
+      color: #ff9800;
+      text-decoration: none;
+    }
+    #adminPanel {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+    #adminPanel input, #adminPanel button {
+      margin: 5px 0;
+      padding: 8px;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
 
-  <header>📘 Ders Notları & PDF Satış Sitesi</header>
+  <header>📘 Kod Mekanizması</header>
 
   <nav>
-    <a href="#dersler">Dersler</a>
-    <a href="#odeme">Ödeme</a>
-    <a href="#iletisim">İletişim</a>
+    <button onclick="showSection('home')">Ana Sayfa</button>
+    <button onclick="showSection('dersler')">Dersler</button>
+    <button onclick="showSection('odeme')">Ödeme</button>
+    <button onclick="showSection('iletisim')">İletişim</button>
+    <button onclick="showSection('adminLogin')">Ders Ekle (Admin)</button>
   </nav>
 
-  <section id="dersler">
-    <h2>📚 Ders Notları</h2>
-    <div id="container">
-      <div class="card"><a href="#" class="btn">Matematik PDF</a></div>
-      <div class="card"><a href="#" class="btn">Fizik PDF</a></div>
-      <div class="card"><a href="#" class="btn">Kimya PDF</a></div>
+  <section id="home">
+    <h2>Hoşgeldiniz</h2>
+    <p>Kod Mekanizması'na hoş geldiniz! Buradan derslere erişebilir, PDF indirebilir ve kolayca ödeme yapabilirsiniz.</p>
+  </section>
+
+  <section id="dersler" class="hidden">
+    <h2>Dersler</h2>
+    <div id="lessonList">
+      <div class="lesson">📗 Örnek Ders 1 - <a href="#">PDF İndir</a></div>
+      <div class="lesson">📘 Örnek Ders 2 - <a href="#">PDF İndir</a></div>
     </div>
   </section>
 
-  <section id="odeme">
-    <h2>💳 Ödeme Bilgileri</h2>
-    <div class="card">
-      <p><b>IBAN:</b> TR98000670100000022363236</p>
-      <button class="btn" onclick="copyIBAN()">📋 IBAN Kopyala</button>
+  <section id="odeme" class="hidden">
+    <h2>Ödeme Bilgileri</h2>
+    <div class="iban-box">
+      <p><b>IBAN:</b> TR980006701000000022363236</p>
+      <button onclick="copyIban()">IBAN Kopyala</button>
     </div>
-    <p>Ödeme yaptıktan sonra dekont ile <b>kodmekanizma.muh@gmail.com</b> adresine ulaşabilirsiniz.</p>
   </section>
 
-  <section id="iletisim">
-    <h2>📬 İletişim</h2>
-    <p>Her türlü soru ve destek için bize e-posta gönderebilirsiniz:</p>
-    <p><b>kodmekanizma.muh@gmail.com</b></p>
+  <section id="iletisim" class="hidden">
+    <h2>İletişim</h2>
+    <p>📧 Mail: <a href="mailto:kodmekanizma.muh@gmail.com">kodmekanizma.muh@gmail.com</a></p>
+  </section>
+
+  <!-- Admin Giriş -->
+  <section id="adminLogin" class="hidden">
+    <h2>Admin Girişi</h2>
+    <input type="password" id="adminPass" placeholder="Şifreyi giriniz">
+    <button onclick="checkLogin()">Giriş Yap</button>
   </section>
 
   <!-- Admin Panel -->
-  <section>
-    <h2>🔐 Admin Girişi</h2>
-    <input type="password" id="adminPass" placeholder="Şifreyi gir">
-    <button class="btn" onclick="checkPass()">Giriş Yap</button>
-
-    <div id="hiddenPanel">
-      <h3>➕ Ders Ekleme Paneli</h3>
-      <input type="text" id="dersAdi" placeholder="Ders Adı">
-      <input type="text" id="pdfLink" placeholder="PDF Linki">
-      <button class="btn" onclick="addLesson()">Ders Ekle</button>
-      <p id="ekleDurum"></p>
-    </div>
+  <section id="adminPanel" class="hidden">
+    <h2>Ders Ekle (Sadece Admin)</h2>
+    <input type="text" id="lessonTitle" placeholder="Ders Adı">
+    <input type="text" id="lessonPdf" placeholder="PDF Linki">
+    <button onclick="addLesson()">Dersi Ekle</button>
   </section>
 
   <footer>
-    <p>© 2025 Ders PDF & Konu Anlatımı | İletişim: kodmekanizma.muh@gmail.com</p>
+    &copy; 2025 Kod Mekanizması | <a href="mailto:kodmekanizma.muh@gmail.com">Bize Ulaşın</a>
   </footer>
 
   <script>
-    function copyIBAN(){
-      navigator.clipboard.writeText("TR98000670100000022363236");
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.add("hidden"));
+      document.getElementById(id).classList.remove("hidden");
+    }
+
+    function copyIban() {
+      navigator.clipboard.writeText("TR980006701000000022363236");
       alert("IBAN kopyalandı!");
     }
 
-    function checkPass(){
+    function checkLogin() {
       let pass = document.getElementById("adminPass").value;
-      if(pass === "2332"){
-        document.getElementById("hiddenPanel").style.display = "block";
+      if(pass === "2332") {
+        showSection("adminPanel");
       } else {
-        alert("Yanlış şifre!");
+        alert("Hatalı şifre!");
       }
     }
 
-    function addLesson(){
-      let ders = document.getElementById("dersAdi").value;
-      let link = document.getElementById("pdfLink").value;
-
-      if(ders && link){
-        let yeni = document.createElement("div");
-        yeni.className = "card";
-        yeni.innerHTML = `<a href="${link}" class="btn">${ders} PDF</a>`;
-        document.querySelector("#container").appendChild(yeni);
-        document.getElementById("ekleDurum").innerText = "✅ Ders başarıyla eklendi!";
+    function addLesson() {
+      let title = document.getElementById("lessonTitle").value;
+      let pdf = document.getElementById("lessonPdf").value;
+      if(title && pdf) {
+        let div = document.createElement("div");
+        div.className = "lesson";
+        div.innerHTML = "📕 " + title + " - <a href='" + pdf + "' target='_blank'>PDF İndir</a>";
+        document.getElementById("lessonList").appendChild(div);
+        alert("Ders başarıyla eklendi!");
       } else {
-        alert("Ders adı ve link boş olamaz!");
+        alert("Lütfen tüm alanları doldurun!");
       }
     }
   </script>
