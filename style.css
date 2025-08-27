@@ -1,128 +1,100 @@
-/* Genel Ayarlar */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
+/* Genel stil */
 body {
-    background: #f4f7fa;
-    color: #333;
-    line-height: 1.6;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #ff80ab, #b388ff, #80deea, #69f0ae, #82b1ff);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #333;
 }
 
-/* HERO */
-.hero {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: white;
-    text-align: center;
-    padding: 80px 20px;
+/* Arka plan animasyonu */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.hero h1 {
-    font-size: 2.5em;
-    margin-bottom: 15px;
+/* Navbar */
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
 
-.hero p {
-    font-size: 1.2em;
-    margin-bottom: 25px;
+nav a {
+  margin: 0 15px;
+  color: #6a1b9a;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.hero .btn {
-    background: #27ae60;
-    padding: 12px 25px;
-    border-radius: 8px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+nav a:hover {
+  color: #ff4081;
 }
 
-.hero .btn:hover {
-    background: #219150;
-    transform: scale(1.05);
+/* Ders kutuları */
+.subject-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 25px auto;
+  width: 80%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* IBAN Bölümü */
-.payment {
-    width: 90%;
-    max-width: 700px;
-    margin: 40px auto;
+.subject-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
-.iban-box {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: 0.3s;
+/* Başlık */
+.subject-card h2 {
+  margin-bottom: 15px;
+  color: #4a148c;
+  font-size: 22px;
 }
 
-.iban-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+/* Butonlar */
+.subject-card button {
+  display: block;
+  margin: 10px 0;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  background: linear-gradient(45deg, #7b1fa2, #ff4081, #00bcd4);
+  background-size: 300% 300%;
+  cursor: pointer;
+  transition: all 0.4s ease;
 }
 
-.iban-box h2 {
-    color: #1e3c72;
-    margin-bottom: 15px;
+.subject-card button:hover {
+  background-position: right center;
+  transform: scale(1.07);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-.iban-box p {
-    margin: 10px 0;
-    font-size: 1.1em;
-}
-
-.iban-number {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #27ae60;
-    display: block;
-    margin-top: 5px;
-}
-
-/* IBAN Buton */
-.iban-btn {
-    margin-top: 15px;
-    padding: 12px 25px;
-    background: #27ae60;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.iban-btn:hover {
-    background: #219150;
-    transform: scale(1.05);
-}
-
-/* Not */
-.note {
-    font-size: 0.9em;
-    color: #666;
-    font-style: italic;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #1e3c72;
-    color: white;
-    margin-top: 50px;
-    border-top: 5px solid #27ae60;
-}
-
-/* Responsive */
+/* Mobil uyum */
 @media (max-width: 768px) {
-    .hero h1 { font-size: 1.8em; }
-    .hero p { font-size: 1em; }
-    .iban-box { padding: 20px; }
-    .iban-number { font-size: 1em; }
+  .subject-card {
+    width: 95%;
+    padding: 15px;
+  }
+
+  nav {
+    font-size: 16px;
+  }
 }
