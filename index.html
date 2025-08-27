@@ -1,131 +1,362 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ders Notları & PDF Satış Sitesi</title>
+<head><link rel="stylesheet" href="style.css">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yetiş Ders Portalı</title>
+
+  <!-- Tek dosyalık CSS (canlı gradient + modern görünüm) -->
   <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#f4f4f4; }
-    header { background:linear-gradient(to right,#6a11cb,#2575fc); color:white; padding:20px; text-align:center; }
-    nav { background:#111; padding:10px; display:flex; justify-content:center; }
-    nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; }
-    nav a:hover { color:#00c3ff; }
+    :root{
+      --radius:20px;
+      --glass: rgba(255,255,255,.14);
+      --glass-strong: rgba(255,255,255,.25);
+      --shadow: 0 10px 30px rgba(0,0,0,.15);
+      --txt: #1a1a1a;
+      --white: #fff;
+      --brand1:#ff4fd8; --brand2:#6a5af9; --brand3:#00e5ff; --brand4:#1de9b6; --brand5:#ff9100;
+    }
 
-    section { padding:20px; }
-    h2 { margin-top:40px; color:#333; }
-    .card { background:white; padding:15px; margin:10px 0; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-    .btn { display:inline-block; background:#6a11cb; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; }
-    .btn:hover { background:#2575fc; }
+    html{scroll-behavior:smooth}
+    *{box-sizing:border-box}
 
-    .admin-panel { background:#fff3cd; padding:20px; border-radius:10px; margin-top:20px; }
-    input, select { padding:8px; margin:5px 0; width:100%; }
-    button { background:#2575fc; color:white; padding:10px; border:none; border-radius:5px; cursor:pointer; }
-    button:hover { background:#6a11cb; }
+    body{
+      margin:0; color:var(--txt);
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(120deg,var(--brand1),var(--brand2),var(--brand3),var(--brand4),var(--brand5));
+      background-size: 500% 500%;
+      animation: bgMove 18s ease-in-out infinite;
+    }
+    @keyframes bgMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    /* NAVBAR */
+    .navbar{
+      position: sticky; top:0; z-index:9999;
+      display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+      padding:12px 18px;
+      background: linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand3),var(--brand4),var(--brand5));
+      background-size:300% 300%; animation: navMove 10s linear infinite;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+      border-radius: 0 0 16px 16px;
+    }
+    @keyframes navMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    .logo{font-weight:800; color:#fff; font-size:18px; white-space:nowrap}
+    .links{display:flex; gap:10px; flex:1; flex-wrap:wrap; justify-content:center}
+    .links a{
+      color:#fff; text-decoration:none; font-weight:700; padding:8px 14px; border-radius:12px;
+      transition:.25s; white-space:nowrap; backdrop-filter:saturate(120%);
+    }
+    .links a:hover{background:rgba(255,255,255,.22); box-shadow:0 0 16px rgba(255,255,255,.5)}
+
+    header{
+      max-width:1100px; margin:26px auto 10px; padding:22px;
+      background:var(--glass); border-radius:var(--radius); backdrop-filter: blur(8px);
+      color:#fff; box-shadow:var(--shadow); text-align:center;
+    }
+    header h1{margin:0 0 6px; font-size:34px}
+    header p{margin:0; font-size:16px; opacity:.95}
+
+    main{max-width:1100px; margin:16px auto; padding:10px}
+
+    .card{
+      background:var(--glass); color:#fff;
+      border-radius:var(--radius); padding:22px; margin:18px 0;
+      box-shadow:var(--shadow); backdrop-filter: blur(8px);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .card:hover{ transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,.22) }
+    .card h2{margin:0 0 14px; font-size:24px}
+
+    .btnrow{display:flex; flex-wrap:wrap; gap:10px}
+    .btn, .btn-outline{
+      display:inline-block; border:none; cursor:pointer; text-decoration:none; font-weight:700;
+      padding:10px 14px; border-radius:12px; transition:.25s;
+    }
+    .btn{
+      color:#fff;
+      background: linear-gradient(90deg,#7b1fa2,#ff4081,#00bcd4);
+      background-size:300% 300%;
+    }
+    .btn:hover{transform:translateY(-2px) scale(1.03); background-position:right center; box-shadow:0 10px 22px rgba(0,0,0,.25)}
+    .btn-outline{
+      color:#fff; border:2px solid rgba(255,255,255,.5); background: transparent;
+    }
+    .btn-outline:hover{background: var(--glass-strong)}
+
+    /* Ödeme & İletişim */
+    #contact p{margin:.4rem 0; font-size:16px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; background:rgba(0,0,0,.25); padding:6px 10px; border-radius:10px}
+    .copy-wrap{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+
+    /* Admin */
+    #admin .row{display:flex; gap:10px; flex-wrap:wrap}
+    input[type="password"], input[type="text"]{
+      padding:10px 12px; border-radius:12px; border:2px solid rgba(255,255,255,.4);
+      background: rgba(255,255,255,.12); color:#fff; outline:none; min-width:220px;
+    }
+    input::placeholder{color:#f0f0f0}
+    .muted{opacity:.85; font-size:14px}
+
+    /* Eklenen dersler listesi */
+    #customList{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .chip{
+      display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:100px;
+      background: rgba(0,0,0,.25); color:#fff;
+    }
+    .chip a{color:#fff; text-decoration:none; font-weight:700}
+    .chip button{background:transparent; border:none; color:#fff; cursor:pointer; font-weight:900}
+
+    footer{max-width:1100px; margin:20px auto 40px; padding:12px; text-align:center; color:#fff; opacity:.9}
+
+    /* Responsive */
+    @media (max-width:768px){
+      .links{justify-content:flex-start}
+      .logo{flex:1}
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>📘 Ders Notları & PDF Satış Sitesi</h1>
-  </header>
-
-  <nav>
-    <a href="#dersler">Dersler</a>
-    <a href="#odeme">Ödeme</a>
-    <a href="#iletisim">İletişim</a>
-    <a href="#admin">Admin</a>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">📘 Yetiş Ders Portalı</div>
+    <div class="links">
+      <a href="#matematik">Matematik</a>
+      <a href="#fizik">Fizik</a>
+      <a href="#kimya">Kimya</a>
+      <a href="#biyoloji">Biyoloji</a>
+      <a href="#cografya">Coğrafya</a>
+      <a href="#tarih">Tarih</a>
+      <a href="#yazilim">Yazılım</a>
+      <a href="#contact">Ödeme</a>
+    </div>
   </nav>
 
-  <!-- Dersler -->
-  <section id="dersler">
-    <h2>📚 Ders Notları</h2>
-    <div id="dersListesi"></div>
-  </section>
+  <!-- KAHRAMAN ALAN -->
+  <header>
+    <h1>📚 Yetiş Eğitim Platformu</h1>
+    <p>9-10-11-12. sınıf ders notları + Yazılım konu anlatımları & PDF föy satışları</p>
+  </header>
 
-  <!-- Ödeme -->
-  <section id="odeme">
-    <h2>💳 Ödeme Bilgileri</h2>
-    <div class="card">
-      <p><b>IBAN:</b> TR9800067010000022363236</p>
-      <button onclick="kopyala()">IBAN Kopyala</button>
-    </div>
-    <p>Ödeme yaptıktan sonra dekont ile <b>kodmekanizma.muh@gmail.com</b> adresine ulaşabilirsiniz.</p>
-  </section>
+  <main>
+    <!-- MATEMATİK -->
+    <section id="matematik" class="card">
+      <h2>📐 Matematik</h2>
+      <div class="btnrow">
+        <a class="btn" href="pdf/9mat.pdf" target="_blank" download>9. Sınıf Matematik</a>
+        <a class="btn" href="pdf/10mat.pdf" target="_blank" download>10. Sınıf Matematik</a>
+        <a class="btn" href="pdf/11mat.pdf" target="_blank" download>11. Sınıf Matematik</a>
+        <a class="btn" href="pdf/12mat.pdf" target="_blank" download>12. Sınıf Matematik</a>
+      </div>
+    </section>
 
-  <!-- İletişim -->
-  <section id="iletisim">
-    <h2>📩 İletişim</h2>
-    <p>Soru ve talepleriniz için e-posta: <b>kodmekanizma.muh@gmail.com</b></p>
-  </section>
+    <!-- FİZİK -->
+    <section id="fizik" class="card">
+      <h2>⚡ Fizik</h2>
+      <div class="btnrow">
+        <a class="btn" href="pdf/9fizik.pdf" target="_blank" download>9. Sınıf Fizik</a>
+        <a class="btn" href="pdf/10fizik.pdf" target="_blank" download>10. Sınıf Fizik</a>
+        <a class="btn" href="pdf/11fizik.pdf" target="_blank" download>11. Sınıf Fizik</a>
+        <a class="btn" href="pdf/12fizik.pdf" target="_blank" download>12. Sınıf Fizik</a>
+      </div>
+    </section>
 
-  <!-- Admin -->
-  <section id="admin">
-    <h2>🔑 Admin Paneli</h2>
-    <div class="admin-panel">
-      <label>Ders Adı:</label>
-      <input type="text" id="dersAdi" placeholder="Matematik, Fizik, Yazılım...">
-      <label>Sınıf:</label>
-      <select id="sinif">
-        <option>9. Sınıf</option>
-        <option>10. Sınıf</option>
-        <option>11. Sınıf</option>
-        <option>12. Sınıf</option>
-      </select>
-      <label>PDF Linki:</label>
-      <input type="text" id="pdfLink" placeholder="https://...">
-      <button onclick="dersEkle()">Ders Ekle</button>
-    </div>
-  </section>
+    <!-- KİMYA -->
+    <section id="kimya" class="card">
+      <h2>🧪 Kimya</h2>
+      <div class="btnrow">
+        <a class="btn" href="pdf/9kimya.pdf" target="_blank" download>9. Sınıf Kimya</a>
+        <a class="btn" href="pdf/10kimya.pdf" target="_blank" download>10. Sınıf Kimya</a>
+        <a class="btn" href="pdf/11kimya.pdf" target="_blank" download>11. Sınıf Kimya</a>
+        <a class="btn" href="pdf/12kimya.pdf" target="_blank" download>12. Sınıf Kimya</a>
+      </div>
+    </section>
 
+    <!-- BİYOLOJİ -->
+    <section id="biyoloji" class="card">
+      <h2>🧬 Biyoloji</h2>
+      <div class="btnrow">
+        <a class="btn" href="pdf/9biyoloji.pdf" target="_blank" download>9. Sınıf Biyoloji</a>
+        <a class="btn" href="pdf/10biyoloji.pdf" target="_blank" download>10. Sınıf Biyoloji</a>
+        <a class="btn" href="pdf/11biyoloji.pdf" target="_blank" download>11. Sınıf Biyoloji</a>
+        <a class="btn" href="pdf/12biyoloji.pdf" target="_blank" download>12. Sınıf Biyoloji</a>
+      </div>
+    </section>
+
+    <!-- COĞRAFYA -->
+    <section id="cografya" class="card">
+      <h2>🌍 Coğrafya</h2>
+      <div class="btnrow">
+        <a class="btn" href="pdf/9cografya.pdf" target="_blank" download>9. Sınıf Coğrafya</a>
+        <a class="btn" href="pdf/10cografya.pdf" target="_blank" download>10. Sınıf Coğrafya</a>
+        <a class="btn" href="pdf/11cografya.pdf" target="_blank" download>11. Sınıf Coğrafya</a>
+        <a class="btn" href="pdf/12cografya.pdf" target="_blank" download>12. Sınıf Coğrafya</a>
+      </div>
+    </section>
+
+    <!-- TARİH -->
+    <section id="tarih" class="card">
+      <h2>📜 Tarih</h2>
+      <div class="btnrow">
+        <a class="btn" href="pdf/9tarih.pdf" target="_blank" download>9. Sınıf Tarih</a>
+        <a class="btn" href="pdf/10tarih.pdf" target="_blank" download>10. Sınıf Tarih</a>
+        <a class="btn" href="pdf/11tarih.pdf" target="_blank" download>11. Sınıf Tarih</a>
+        <a class="btn" href="pdf/12tarih.pdf" target="_blank" download>12. Sınıf Tarih</a>
+      </div>
+    </section>
+
+    <!-- YAZILIM -->
+    <section id="yazilim" class="card">
+      <h2>💻 Yazılım</h2>
+      <p class="muted">Konu anlatımı ve föyler</p>
+      <div class="btnrow" style="margin-bottom:8px">
+        <a class="btn-outline" href="pdf/yazilim_baslangic.pdf" target="_blank" download>Başlangıç</a>
+        <a class="btn-outline" href="pdf/yazilim_orta.pdf" target="_blank" download>Orta Seviye</a>
+        <a class="btn-outline" href="pdf/yazilim_ileri.pdf" target="_blank" download>İleri Seviye</a>
+      </div>
+      <div class="btnrow">
+        <a class="btn" href="pdf/python.pdf" target="_blank" download>Python</a>
+        <a class="btn" href="pdf/java.pdf" target="_blank" download>Java</a>
+        <a class="btn" href="pdf/csharp.pdf" target="_blank" download>C#</a>
+        <a class="btn" href="pdf/veritabani.pdf" target="_blank" download>Veritabanı</a>
+        <a class="btn" href="pdf/web.pdf" target="_blank" download>Web</a>
+      </div>
+    </section>
+
+    <!-- ÖDEME & İLETİŞİM -->
+    <section id="contact" class="card">
+      <h2>💳 Satın Alma & İletişim</h2>
+      <div class="copy-wrap">
+        <span><strong>IBAN:</strong></span>
+        <span id="ibanText" class="mono">TR980006701000000022363236</span>
+        <button class="btn" onclick="copyIBAN()">Kopyala</button>
+      </div>
+      <p><strong>E-posta:</strong> <a class="btn-outline" href="mailto:kodmekanizma.muh@gmail.com">kodmekanizma.muh@gmail.com</a></p>
+      <p class="muted">Ödeme açıklamasına lütfen <em>ad-soyad + satın alınan PDF adı</em> yazınız.</p>
+    </section>
+
+    <!-- ADMIN: SADECE SEN GÖR (Şifre: 2332) -->
+    <section id="admin" class="card">
+      <h2>🔐 Ders Ekleme (Yalnızca Admin)</h2>
+      <div id="loginBox" class="row">
+        <input type="password" id="adminPass" placeholder="Şifreyi gir (2332)">
+        <button class="btn" onclick="checkPass()">Giriş Yap</button>
+      </div>
+
+      <div id="adminPanel" style="display:none; margin-top:12px;">
+        <div class="row">
+          <input type="text" id="newTitle" placeholder="Ders başlığı (ör: TYT Deneme 1)">
+          <input type="text" id="newFile" placeholder="pdf dosya adı (ör: tyt1.pdf)">
+          <button class="btn" onclick="addCustom()">Ekle</button>
+        </div>
+        <p class="muted">Eklenen bağlantılar aşağıda görünür ve tarayıcıda kaydedilir (localStorage).</p>
+        <div id="customList"></div>
+      </div>
+    </section>
+
+    <!-- EKLENEN DERSLER (Kullanıcıya görünür) -->
+    <section class="card">
+      <h2>🗂️ Eklenen Dersler</h2>
+      <div id="customPublic" class="btnrow"></div>
+    </section>
+  </main>
+
+  <footer>© 2025 Yetiş Eğitim Platformu</footer>
+
+  <!-- JS -->
   <script>
-    // Başlangıç dersleri
-    const dersler = {
-      "Matematik": { "9. Sınıf": "#", "10. Sınıf": "#", "11. Sınıf": "#", "12. Sınıf": "#" },
-      "Fizik": { "9. Sınıf": "#", "10. Sınıf": "#", "11. Sınıf": "#", "12. Sınıf": "#" },
-      "Kimya": { "9. Sınıf": "#", "10. Sınıf": "#", "11. Sınıf": "#", "12. Sınıf": "#" },
-      "Biyoloji": { "9. Sınıf": "#", "10. Sınıf": "#", "11. Sınıf": "#", "12. Sınıf": "#" },
-      "Coğrafya": { "9. Sınıf": "#", "10. Sınıf": "#", "11. Sınıf": "#", "12. Sınıf": "#" },
-      "Tarih": { "9. Sınıf": "#", "10. Sınıf": "#", "11. Sınıf": "#", "12. Sınıf": "#" },
-      "Yazılım": { "Başlangıç": "#", "Orta Seviye": "#", "İleri Seviye": "#" }
-    };
+    // IBAN kopyalama
+    function copyIBAN(){
+      const txt = document.getElementById('ibanText').innerText.trim();
+      navigator.clipboard.writeText(txt).then(()=>alert('IBAN kopyalandı: ' + txt));
+    }
 
-    function renderDersler() {
-      const dersListesi = document.getElementById("dersListesi");
-      dersListesi.innerHTML = "";
-      for (let ders in dersler) {
-        const dersDiv = document.createElement("div");
-        dersDiv.className = "card";
-        let html = `<h3>${ders}</h3>`;
-        for (let seviye in dersler[ders]) {
-          html += `<p><a class="btn" href="${dersler[ders][seviye]}" target="_blank">${seviye} PDF</a></p>`;
-        }
-        dersDiv.innerHTML = html;
-        dersListesi.appendChild(dersDiv);
+    // Admin giriş
+    function checkPass(){
+      const pass = document.getElementById('adminPass').value.trim();
+      if(pass === '2332'){
+        document.getElementById('loginBox').style.display='none';
+        document.getElementById('adminPanel').style.display='block';
+      }else{
+        alert('Hatalı şifre!');
       }
     }
 
-    function dersEkle() {
-      const dersAdi = document.getElementById("dersAdi").value;
-      const sinif = document.getElementById("sinif").value;
-      const pdfLink = document.getElementById("pdfLink").value;
-      if (!dersAdi || !sinif || !pdfLink) {
-        alert("Lütfen tüm alanları doldurun!");
-        return;
+    // LocalStorage yardımcıları
+    const KEY='customLessons';
+    function loadCustom(){
+      try{ return JSON.parse(localStorage.getItem(KEY) || '[]'); }catch(e){ return []; }
+    }
+    function saveCustom(list){ localStorage.setItem(KEY, JSON.stringify(list)); renderCustom(); }
+
+    // Öğe ekle
+    function addCustom(){
+      const title = document.getElementById('newTitle').value.trim();
+      const file = document.getElementById('newFile').value.trim();
+      if(!title || !file){ alert('Başlık ve dosya adı gerekli.'); return; }
+      const list = loadCustom();
+      list.push({title, file});
+      saveCustom(list);
+      document.getElementById('newTitle').value='';
+      document.getElementById('newFile').value='';
+    }
+
+    // Öğe sil
+    function removeCustom(idx){
+      const list = loadCustom();
+      list.splice(idx,1);
+      saveCustom(list);
+    }
+
+    // Render: admin içi + herkese açık liste
+    function renderCustom(){
+      const list = loadCustom();
+
+      // Admin listesi (chip'ler)
+      const adminBox = document.getElementById('customList');
+      if(adminBox){
+        adminBox.innerHTML='';
+        list.forEach((it, i)=>{
+          const chip = document.createElement('div');
+          chip.className='chip';
+          const a = document.createElement('a');
+          a.href = 'pdf/' + it.file;
+          a.target='_blank';
+          a.download='';
+          a.textContent = it.title;
+          const del = document.createElement('button');
+          del.title='Sil'; del.textContent='×';
+          del.onclick = ()=>removeCustom(i);
+          chip.appendChild(a); chip.appendChild(del);
+          adminBox.appendChild(chip);
+        });
       }
-      if (!dersler[dersAdi]) dersler[dersAdi] = {};
-      dersler[dersAdi][sinif] = pdfLink;
-      renderDersler();
-      alert("Ders başarıyla eklendi!");
+
+      // Herkese açık düğmeler
+      const pub = document.getElementById('customPublic');
+      if(pub){
+        pub.innerHTML='';
+        list.forEach(it=>{
+          const a = document.createElement('a');
+          a.className='btn';
+          a.href='pdf/' + it.file; a.target='_blank'; a.download='';
+          a.textContent = it.title;
+          pub.appendChild(a);
+        });
+      }
     }
 
-    function kopyala() {
-      navigator.clipboard.writeText("TR9800067010000022363236");
-      alert("IBAN kopyalandı!");
-    }
-
-    // Sayfa yüklenince dersleri göster
-    renderDersler();
+    // İlk yüklemede kullanıcıya ait eklenenleri göster
+    renderCustom();
   </script>
-
 </body>
 </html>
