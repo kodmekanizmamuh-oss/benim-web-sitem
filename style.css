@@ -1,0 +1,128 @@
+/* Genel Ayarlar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f4f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+}
+
+.hero .btn {
+    background: #27ae60;
+    padding: 12px 25px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.hero .btn:hover {
+    background: #219150;
+    transform: scale(1.05);
+}
+
+/* IBAN Bölümü */
+.payment {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+}
+
+.iban-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.iban-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.iban-box h2 {
+    color: #1e3c72;
+    margin-bottom: 15px;
+}
+
+.iban-box p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.iban-number {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #27ae60;
+    display: block;
+    margin-top: 5px;
+}
+
+/* IBAN Buton */
+.iban-btn {
+    margin-top: 15px;
+    padding: 12px 25px;
+    background: #27ae60;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.iban-btn:hover {
+    background: #219150;
+    transform: scale(1.05);
+}
+
+/* Not */
+.note {
+    font-size: 0.9em;
+    color: #666;
+    font-style: italic;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1e3c72;
+    color: white;
+    margin-top: 50px;
+    border-top: 5px solid #27ae60;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 1.8em; }
+    .hero p { font-size: 1em; }
+    .iban-box { padding: 20px; }
+    .iban-number { font-size: 1em; }
+}

@@ -1,0 +1,32 @@
+web-site/
+├── index.html
+└── pdf/
+    ├── 9mat.pdf
+    ├── 9fizik.pdf
+    ├── 9kimya.pdf
+    ├── 9biyoloji.pdf
+    ├── 9tarih.pdf
+    ├── 9cografya.pdf
+    ├── 10mat.pdf
+    ├── 10fizik.pdf
+    ├── 10kimya.pdf
+    ├── 10biyoloji.pdf
+    ├── 10tarih.pdf
+    ├── 10cografya.pdf
+    ├── 11mat.pdf
+    ├── 11fizik.pdf
+    ├── 11kimya.pdf
+    ├── 11biyoloji.pdf
+    ├── 11tarih.pdf
+    ├── 11cografya.pdf
+    ├── 12mat.pdf
+    ├── 12fizik.pdf
+    ├── 12kimya.pdf
+    ├── 12biyoloji.pdf
+    ├── 12tarih.pdf
+    ├── 12cografya.pdf
+    ├── python.pdf
+    ├── java.pdf
+    ├── csharp.pdf
+    ├── veritabani.pdf
+    └── web.pdf
