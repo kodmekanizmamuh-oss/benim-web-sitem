@@ -1,183 +1,172 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PDF Satış Sitesi</title>
+  <title>Ders Notları & PDF Satış Sitesi</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f6f9;
+      background: #f9f9f9;
       color: #333;
     }
-
-    /* Gradient Menü */
+    header {
+      background: linear-gradient(135deg, #4a90e2, #9013fe);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
     nav {
-      background: linear-gradient(90deg, #ff512f, #dd2476);
-      padding: 15px;
+      background: #333;
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
     }
     nav a {
-      color: #fff;
+      color: white;
       text-decoration: none;
-      font-weight: bold;
-      position: relative;
-      transition: 0.3s;
+      padding: 14px 20px;
+      display: block;
     }
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -5px;
-      width: 0%;
-      height: 2px;
-      background: #fff;
-      transition: 0.3s;
+    nav a:hover {
+      background: #575757;
     }
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    /* Bölümler */
     section {
       padding: 20px;
-      margin: 20px auto;
       max-width: 800px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: auto;
     }
-
-    h2 {
-      margin-top: 0;
-      color: #dd2476;
-    }
-
-    /* Accordion */
     .accordion {
       background: #eee;
+      color: #444;
       cursor: pointer;
-      padding: 15px;
+      padding: 14px;
       width: 100%;
       border: none;
       text-align: left;
       outline: none;
       font-size: 16px;
-      transition: background 0.3s ease;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-
-    .accordion:hover {
-      background: #ddd;
-    }
-
-    .panel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease-out;
-      background: #fafafa;
-      border-left: 4px solid #dd2476;
+      transition: 0.3s;
+      margin-top: 10px;
       border-radius: 6px;
+    }
+    .active, .accordion:hover {
+      background-color: #ccc;
+    }
+    .panel {
+      padding: 0 18px;
+      display: none;
+      background-color: white;
+      overflow: hidden;
+      border-radius: 0 0 6px 6px;
       margin-bottom: 10px;
-      padding: 0 15px;
     }
-
-    .panel ul {
-      margin: 10px 0;
-      padding-left: 20px;
+    .iban-box {
+      background: #f3f3f3;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 15px;
+      border: 1px solid #ddd;
     }
-
+    .btn {
+      background: linear-gradient(135deg, #4a90e2, #9013fe);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
     footer {
+      background: #333;
+      color: white;
       text-align: center;
       padding: 15px;
-      background: linear-gradient(90deg, #dd2476, #ff512f);
-      color: #fff;
       margin-top: 30px;
-    }
-
-    .iban {
-      font-weight: bold;
-      color: #c82333;
-      font-size: 18px;
     }
   </style>
 </head>
 <body>
 
-  <!-- ÜST MENÜ -->
+  <header>
+    <h1>📚 Ders Notları & PDF Satış Sitesi</h1>
+  </header>
+
   <nav>
-    <a href="#dersler">📘 Dersler</a>
-    <a href="#satis">💳 Satış</a>
-    <a href="#iletisim">✉️ İletişim</a>
+    <a href="#dersler">Dersler</a>
+    <a href="#odeme">Ödeme</a>
+    <a href="#iletisim">İletişim</a>
   </nav>
 
-  <!-- DERSLER -->
   <section id="dersler">
-    <h2>Ders Konuları</h2>
-
-    <button class="accordion">📚 Fen Dersleri</button>
+    <h2>📘 Ders Notları</h2>
+    <button class="accordion">Matematik PDF</button>
     <div class="panel">
-      <ul>
-        <li>Fizik</li>
-        <li>Kimya</li>
-        <li>Biyoloji</li>
-        <li>Coğrafya</li>
-        <li>Tarih</li>
-      </ul>
+      <p>Matematik konu anlatımı ve soru çözümleri PDF formatında.</p>
     </div>
 
-    <button class="accordion">💻 Yazılım Dersleri</button>
+    <button class="accordion">Fizik PDF</button>
     <div class="panel">
-      <ul>
-        <li>Algoritma ve Programlama</li>
-        <li>Python ile Kodlama</li>
-        <li>Web Geliştirme</li>
-        <li>Veritabanı Temelleri</li>
-        <li>Mobil Uygulama Geliştirme</li>
-      </ul>
+      <p>Fizik ders notları ve formüller PDF formatında.</p>
+    </div>
+
+    <button class="accordion">Kimya PDF</button>
+    <div class="panel">
+      <p>Kimya ders notları, konu özetleri PDF halinde.</p>
     </div>
   </section>
 
-  <!-- SATIŞ -->
-  <section id="satis">
-    <h2>📄 PDF Föy Satışları</h2>
-    <p>Konu anlatımlı PDF föyleri satın almak için aşağıdaki IBAN’a ödeme yapabilirsiniz:</p>
-    <p class="iban">IBAN: TR980006701000000022363236</p>
-    <p>Ödeme yaptıktan sonra bize e-posta ile ulaşabilirsiniz: 
-      <b>ornekmail@gmail.com</b></p>
+  <section id="odeme">
+    <h2>💳 Ödeme Bilgileri</h2>
+    <div class="iban-box">
+      <b>IBAN:</b> TR980006701000000022363236 <br>
+      <button class="btn" onclick="copyIBAN()">📋 IBAN Kopyala</button>
+    </div>
+    <p>Ödeme yaptıktan sonra dekont ile <b>ornekmail@gmail.com</b> adresine ulaşabilirsiniz.</p>
   </section>
 
-  <!-- İLETİŞİM -->
   <section id="iletisim">
-    <h2>📬 İletişim</h2>
+    <h2>📩 İletişim</h2>
     <p>Her türlü soru ve destek için bize e-posta gönderebilirsiniz.</p>
-    <p><b>ornekmail@gmail.com</b></p>
+    <b>ornekmail@gmail.com</b>
   </section>
 
   <footer>
     © 2025 Ders Notları & PDF Satış Sitesi
   </footer>
 
-  <!-- JS: Accordion -->
   <script>
-    const acc = document.querySelectorAll(".accordion");
-    acc.forEach(button => {
-      button.addEventListener("click", function() {
+    // IBAN Kopyalama
+    function copyIBAN() {
+      const iban = "TR980006701000000022363236";
+      navigator.clipboard.writeText(iban).then(() => {
+        alert("✅ IBAN kopyalandı: " + iban);
+      });
+    }
+
+    // Akordeon (ders açılır menü)
+    var acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
         this.classList.toggle("active");
-        const panel = this.nextElementSibling;
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null;
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
         } else {
-          panel.style.maxHeight = panel.scrollHeight + "px";
+          panel.style.display = "block";
         }
       });
-    });
+    }
   </script>
 
 </body>
