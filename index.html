@@ -6,11 +6,11 @@
 <title>YAZILIMCI</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-body { font-family:'Montserrat',sans-serif; margin:0; background:#0f0c29; background: linear-gradient(135deg,#0f0c29,#302b63,#24243e); color:white; overflow-x:hidden;}
-header { text-align:center; font-size:36px; font-weight:700; padding:30px; text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff; animation: glow 2s infinite alternate;}
+body { font-family:'Montserrat',sans-serif; margin:0; background:#0f0c29; background: linear-gradient(135deg,#0f0c29,#302b63,#24243e); color:white;}
+header { text-align:center; font-size:40px; font-weight:700; padding:30px; text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff; animation: glow 2s infinite alternate;}
 @keyframes glow { from {text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff;} to {text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;} }
-.container { max-width:1200px; margin:20px auto; padding:20px; background: rgba(0,0,0,0.6); border-radius:20px; box-shadow:0 0 30px rgba(0,255,255,0.2);}
-h2 { color:#0ff; text-shadow:0 0 10px #0ff; text-align:center; }
+.container { max-width:1200px; margin:20px auto; padding:20px; background: rgba(0,0,0,0.7); border-radius:20px; box-shadow:0 0 30px rgba(0,255,255,0.2);}
+h2 { color:#0ff; text-align:center; text-shadow:0 0 10px #0ff; }
 button, .category-btn { cursor:pointer; transition: all 0.3s ease; border:none; border-radius:12px; font-weight:700; color:#000; background: linear-gradient(90deg,#0ff,#0ff,#0ff); padding:12px 22px; margin:6px; animation: float 3s ease-in-out infinite; text-shadow: 0 0 5px #0ff; }
 button:hover, .category-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;}
 @keyframes float { 0%,100% {transform: translateY(0);} 50% {transform: translateY(-8px);} }
@@ -88,20 +88,29 @@ footer { text-align:center; padding:20px; margin-top:30px; background:#0f0c29; c
 function show(id){ document.querySelectorAll('.section').forEach(s=>s.style.display='none'); document.getElementById(id).style.display='block'; }
 // IBAN kopyala
 function copyIban(){navigator.clipboard.writeText(document.getElementById("iban").innerText).then(()=>alert("IBAN kopyalandı"));}
+
 // Ders listesi
 let lessons = [
-{kategori:"9. Sınıf",isim:"Matematik",pdf:"matematik9.pdf"},
-{kategori:"9. Sınıf",isim:"Fizik",pdf:"fizik9.pdf"},
-{kategori:"10. Sınıf",isim:"Matematik",pdf:"matematik10.pdf"},
-{kategori:"10. Sınıf",isim:"Fizik",pdf:"fizik10.pdf"},
-{kategori:"11. Sınıf",isim:"Matematik",pdf:"matematik11.pdf"},
-{kategori:"11. Sınıf",isim:"Fizik",pdf:"fizik11.pdf"},
-{kategori:"12. Sınıf",isim:"Matematik",pdf:"matematik12.pdf"},
-{kategori:"12. Sınıf",isim:"Fizik",pdf:"fizik12.pdf"},
-{kategori:"Yazılım",isim:"Python",pdf:"python.pdf"},
-{kategori:"Yazılım",isim:"Java",pdf:"java.pdf"},
-{kategori:"Office",isim:"Excel",pdf:"excel.pdf"},
-{kategori:"Office",isim:"Word",pdf:"word.pdf"}
+  {kategori:"9. Sınıf",isim:"Matematik",pdf:"matematik9.pdf"},
+  {kategori:"9. Sınıf",isim:"Fizik",pdf:"fizik9.pdf"},
+  {kategori:"9. Sınıf",isim:"Kimya",pdf:"kimya9.pdf"},
+  {kategori:"9. Sınıf",isim:"Biyoloji",pdf:"biyoloji9.pdf"},
+  {kategori:"10. Sınıf",isim:"Matematik",pdf:"matematik10.pdf"},
+  {kategori:"10. Sınıf",isim:"Fizik",pdf:"fizik10.pdf"},
+  {kategori:"10. Sınıf",isim:"Kimya",pdf:"kimya10.pdf"},
+  {kategori:"10. Sınıf",isim:"Biyoloji",pdf:"biyoloji10.pdf"},
+  {kategori:"11. Sınıf",isim:"Matematik",pdf:"matematik11.pdf"},
+  {kategori:"11. Sınıf",isim:"Fizik",pdf:"fizik11.pdf"},
+  {kategori:"11. Sınıf",isim:"Kimya",pdf:"kimya11.pdf"},
+  {kategori:"11. Sınıf",isim:"Biyoloji",pdf:"biyoloji11.pdf"},
+  {kategori:"12. Sınıf",isim:"Matematik",pdf:"matematik12.pdf"},
+  {kategori:"12. Sınıf",isim:"Fizik",pdf:"fizik12.pdf"},
+  {kategori:"12. Sınıf",isim:"Kimya",pdf:"kimya12.pdf"},
+  {kategori:"12. Sınıf",isim:"Biyoloji",pdf:"biyoloji12.pdf"},
+  {kategori:"Yazılım",isim:"Python",pdf:"python.pdf"},
+  {kategori:"Yazılım",isim:"Java",pdf:"java.pdf"},
+  {kategori:"Office",isim:"Excel",pdf:"excel.pdf"},
+  {kategori:"Office",isim:"Word",pdf:"word.pdf"}
 ];
 
 function updateCategories(){ 
@@ -122,5 +131,43 @@ function displayLessons(cat){
     lessons.filter(l=>l.kategori===cat).forEach(l=>{ 
         let div=document.createElement("div"); 
         div.className="lesson"; 
-        div.inner
+        div.innerHTML=`<span onclick="alert('Ders: ${l.isim}')">${l.isim}</span>
+        <button onclick="alert('PDF satın al: ${l.pdf}')">PDF Satın Al</button>
+        <button onclick="alert('Ders çalış: ${l.isim}')">Ders Çalış</button>`; 
+        list.appendChild(div); 
+    }); 
+}
 
+// Admin
+const ADMIN_PASS="2332";
+function loginAdmin(){
+    const val=document.getElementById("adminPass").value;
+    if(val===ADMIN_PASS){
+        document.getElementById("loginResult").style.color="lime";
+        document.getElementById("loginResult").innerText="✅ Giriş başarılı!";
+        document.getElementById("lessonAdd").style.display="block";
+    } else {
+        document.getElementById("loginResult").style.color="red";
+        document.getElementById("loginResult").innerText="❌ Hatalı şifre!";
+    }
+}
+
+function addLesson(){
+    const isim=document.getElementById("lessonName").value;
+    const kategori=document.getElementById("lessonCategory").value;
+    const pdf=document.getElementById("lessonPDF").value;
+    if(isim && kategori && pdf){
+        lessons.push({kategori:kategori,isim:isim,pdf:pdf});
+        alert("Ders eklendi!");
+        updateCategories();
+        document.getElementById("lessonName").value="";
+        document.getElementById("lessonPDF").value="";
+    } else alert("Lütfen tüm alanları doldurun!");
+}
+
+// Başlangıçta kategori butonlarını yükle
+updateCategories();
+</script>
+
+</body>
+</html>
