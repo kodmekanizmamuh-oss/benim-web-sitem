@@ -6,7 +6,7 @@
 <title>YAZILIMCI</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-body { font-family:'Montserrat',sans-serif; margin:0; background:#0f0c29; background: linear-gradient(135deg,#0f0c29,#302b63,#24243e); color:white;}
+body { font-family:'Montserrat',sans-serif; margin:0; background: linear-gradient(135deg,#0f0c29,#302b63,#24243e); color:white;}
 header { text-align:center; font-size:40px; font-weight:700; padding:30px; text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff; animation: glow 2s infinite alternate;}
 @keyframes glow { from {text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff;} to {text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;} }
 .container { max-width:1200px; margin:20px auto; padding:20px; background: rgba(0,0,0,0.7); border-radius:20px; box-shadow:0 0 30px rgba(0,255,255,0.2);}
@@ -72,7 +72,7 @@ footer { text-align:center; padding:20px; margin-top:30px; background:#0f0c29; c
 <option>9. Sınıf</option><option>10. Sınıf</option><option>11. Sınıf</option><option>12. Sınıf</option>
 <option>Yazılım</option><option>Office</option>
 </select>
-<input type="text" id="lessonPDF" placeholder="PDF dosya adı">
+<input type="text" id="lessonPDF" placeholder="PDF dosya adı (pdfler/ klasörü içinde)">
 <button onclick="addLesson()">Ders Ekle</button>
 </div>
 <button onclick="show('home')">← Ana Sayfaya Dön</button>
@@ -91,26 +91,26 @@ function copyIban(){navigator.clipboard.writeText(document.getElementById("iban"
 
 // Ders listesi
 let lessons = [
-  {kategori:"9. Sınıf",isim:"Matematik",pdf:"matematik9.pdf"},
-  {kategori:"9. Sınıf",isim:"Fizik",pdf:"fizik9.pdf"},
-  {kategori:"9. Sınıf",isim:"Kimya",pdf:"kimya9.pdf"},
-  {kategori:"9. Sınıf",isim:"Biyoloji",pdf:"biyoloji9.pdf"},
-  {kategori:"10. Sınıf",isim:"Matematik",pdf:"matematik10.pdf"},
-  {kategori:"10. Sınıf",isim:"Fizik",pdf:"fizik10.pdf"},
-  {kategori:"10. Sınıf",isim:"Kimya",pdf:"kimya10.pdf"},
-  {kategori:"10. Sınıf",isim:"Biyoloji",pdf:"biyoloji10.pdf"},
-  {kategori:"11. Sınıf",isim:"Matematik",pdf:"matematik11.pdf"},
-  {kategori:"11. Sınıf",isim:"Fizik",pdf:"fizik11.pdf"},
-  {kategori:"11. Sınıf",isim:"Kimya",pdf:"kimya11.pdf"},
-  {kategori:"11. Sınıf",isim:"Biyoloji",pdf:"biyoloji11.pdf"},
-  {kategori:"12. Sınıf",isim:"Matematik",pdf:"matematik12.pdf"},
-  {kategori:"12. Sınıf",isim:"Fizik",pdf:"fizik12.pdf"},
-  {kategori:"12. Sınıf",isim:"Kimya",pdf:"kimya12.pdf"},
-  {kategori:"12. Sınıf",isim:"Biyoloji",pdf:"biyoloji12.pdf"},
-  {kategori:"Yazılım",isim:"Python",pdf:"python.pdf"},
-  {kategori:"Yazılım",isim:"Java",pdf:"java.pdf"},
-  {kategori:"Office",isim:"Excel",pdf:"excel.pdf"},
-  {kategori:"Office",isim:"Word",pdf:"word.pdf"}
+  {kategori:"9. Sınıf",isim:"Matematik",pdf:"pdfler/matematik9.pdf"},
+  {kategori:"9. Sınıf",isim:"Fizik",pdf:"pdfler/fizik9.pdf"},
+  {kategori:"9. Sınıf",isim:"Kimya",pdf:"pdfler/kimya9.pdf"},
+  {kategori:"9. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji9.pdf"},
+  {kategori:"10. Sınıf",isim:"Matematik",pdf:"pdfler/matematik10.pdf"},
+  {kategori:"10. Sınıf",isim:"Fizik",pdf:"pdfler/fizik10.pdf"},
+  {kategori:"10. Sınıf",isim:"Kimya",pdf:"pdfler/kimya10.pdf"},
+  {kategori:"10. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji10.pdf"},
+  {kategori:"11. Sınıf",isim:"Matematik",pdf:"pdfler/matematik11.pdf"},
+  {kategori:"11. Sınıf",isim:"Fizik",pdf:"pdfler/fizik11.pdf"},
+  {kategori:"11. Sınıf",isim:"Kimya",pdf:"pdfler/kimya11.pdf"},
+  {kategori:"11. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji11.pdf"},
+  {kategori:"12. Sınıf",isim:"Matematik",pdf:"pdfler/matematik12.pdf"},
+  {kategori:"12. Sınıf",isim:"Fizik",pdf:"pdfler/fizik12.pdf"},
+  {kategori:"12. Sınıf",isim:"Kimya",pdf:"pdfler/kimya12.pdf"},
+  {kategori:"12. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji12.pdf"},
+  {kategori:"Yazılım",isim:"Python",pdf:"pdfler/python.pdf"},
+  {kategori:"Yazılım",isim:"Java",pdf:"pdfler/java.pdf"},
+  {kategori:"Office",isim:"Excel",pdf:"pdfler/excel.pdf"},
+  {kategori:"Office",isim:"Word",pdf:"pdfler/word.pdf"}
 ];
 
 function updateCategories(){ 
@@ -132,8 +132,8 @@ function displayLessons(cat){
         let div=document.createElement("div"); 
         div.className="lesson"; 
         div.innerHTML=`<span onclick="alert('Ders: ${l.isim}')">${l.isim}</span>
-        <button onclick="alert('PDF satın al: ${l.pdf}')">PDF Satın Al</button>
-        <button onclick="alert('Ders çalış: ${l.isim}')">Ders Çalış</button>`; 
+        <button onclick="window.open('${l.pdf}','_blank')">PDF Satın Al</button>
+        <button onclick="window.open('${l.pdf}','_blank')">Ders Çalış</button>`; 
         list.appendChild(div); 
     }); 
 }
