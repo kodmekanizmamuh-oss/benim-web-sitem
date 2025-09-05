@@ -84,90 +84,36 @@ footer { text-align:center; padding:20px; margin-top:30px; background:#0f0c29; c
 <footer>© 2025 YAZILIMCI</footer>
 
 <script>
-// Bölüm geçişi
 function show(id){ document.querySelectorAll('.section').forEach(s=>s.style.display='none'); document.getElementById(id).style.display='block'; }
-// IBAN kopyala
 function copyIban(){navigator.clipboard.writeText(document.getElementById("iban").innerText).then(()=>alert("IBAN kopyalandı"));}
 
-// Ders listesi
 let lessons = [
-  {kategori:"9. Sınıf",isim:"Matematik",pdf:"pdfler/matematik9.pdf"},
-  {kategori:"9. Sınıf",isim:"Fizik",pdf:"pdfler/fizik9.pdf"},
-  {kategori:"9. Sınıf",isim:"Kimya",pdf:"pdfler/kimya9.pdf"},
-  {kategori:"9. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji9.pdf"},
-  {kategori:"10. Sınıf",isim:"Matematik",pdf:"pdfler/matematik10.pdf"},
-  {kategori:"10. Sınıf",isim:"Fizik",pdf:"pdfler/fizik10.pdf"},
-  {kategori:"10. Sınıf",isim:"Kimya",pdf:"pdfler/kimya10.pdf"},
-  {kategori:"10. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji10.pdf"},
-  {kategori:"11. Sınıf",isim:"Matematik",pdf:"pdfler/matematik11.pdf"},
-  {kategori:"11. Sınıf",isim:"Fizik",pdf:"pdfler/fizik11.pdf"},
-  {kategori:"11. Sınıf",isim:"Kimya",pdf:"pdfler/kimya11.pdf"},
-  {kategori:"11. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji11.pdf"},
-  {kategori:"12. Sınıf",isim:"Matematik",pdf:"pdfler/matematik12.pdf"},
-  {kategori:"12. Sınıf",isim:"Fizik",pdf:"pdfler/fizik12.pdf"},
-  {kategori:"12. Sınıf",isim:"Kimya",pdf:"pdfler/kimya12.pdf"},
-  {kategori:"12. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji12.pdf"},
-  {kategori:"Yazılım",isim:"Python",pdf:"pdfler/python.pdf"},
-  {kategori:"Yazılım",isim:"Java",pdf:"pdfler/java.pdf"},
-  {kategori:"Office",isim:"Excel",pdf:"pdfler/excel.pdf"},
-  {kategori:"Office",isim:"Word",pdf:"pdfler/word.pdf"}
+{kategori:"9. Sınıf",isim:"Matematik",pdf:"pdfler/matematik9.pdf"},
+{kategori:"9. Sınıf",isim:"Fizik",pdf:"pdfler/fizik9.pdf"},
+{kategori:"9. Sınıf",isim:"Kimya",pdf:"pdfler/kimya9.pdf"},
+{kategori:"9. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji9.pdf"},
+{kategori:"10. Sınıf",isim:"Matematik",pdf:"pdfler/matematik10.pdf"},
+{kategori:"10. Sınıf",isim:"Fizik",pdf:"pdfler/fizik10.pdf"},
+{kategori:"10. Sınıf",isim:"Kimya",pdf:"pdfler/kimya10.pdf"},
+{kategori:"10. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji10.pdf"},
+{kategori:"11. Sınıf",isim:"Matematik",pdf:"pdfler/matematik11.pdf"},
+{kategori:"11. Sınıf",isim:"Fizik",pdf:"pdfler/fizik11.pdf"},
+{kategori:"11. Sınıf",isim:"Kimya",pdf:"pdfler/kimya11.pdf"},
+{kategori:"11. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji11.pdf"},
+{kategori:"12. Sınıf",isim:"Matematik",pdf:"pdfler/matematik12.pdf"},
+{kategori:"12. Sınıf",isim:"Fizik",pdf:"pdfler/fizik12.pdf"},
+{kategori:"12. Sınıf",isim:"Kimya",pdf:"pdfler/kimya12.pdf"},
+{kategori:"12. Sınıf",isim:"Biyoloji",pdf:"pdfler/biyoloji12.pdf"},
+{kategori:"Yazılım",isim:"Python",pdf:"pdfler/python.pdf"},
+{kategori:"Yazılım",isim:"Java",pdf:"pdfler/java.pdf"},
+{kategori:"Office",isim:"Excel",pdf:"pdfler/excel.pdf"},
+{kategori:"Office",isim:"Word",pdf:"pdfler/word.pdf"}
 ];
 
 function updateCategories(){ 
-    const catDiv=document.getElementById("categories"); catDiv.innerHTML=""; 
-    let cats=[...new Set(lessons.map(l=>l.kategori))]; 
-    cats.forEach(c=>{ 
-        let b=document.createElement("button"); 
-        b.className="category-btn"; 
-        b.innerText=c; 
-        b.onclick=()=>displayLessons(c); 
-        catDiv.appendChild(b); 
-    }); 
-}
-
-function displayLessons(cat){ 
-    const list=document.getElementById("lessonsList"); 
-    list.innerHTML=""; 
-    lessons.filter(l=>l.kategori===cat).forEach(l=>{ 
-        let div=document.createElement("div"); 
-        div.className="lesson"; 
-        div.innerHTML=`<span onclick="alert('Ders: ${l.isim}')">${l.isim}</span>
-        <button onclick="window.open('${l.pdf}','_blank')">PDF Satın Al</button>
-        <button onclick="window.open('${l.pdf}','_blank')">Ders Çalış</button>`; 
-        list.appendChild(div); 
-    }); 
-}
-
-// Admin
-const ADMIN_PASS="2332";
-function loginAdmin(){
-    const val=document.getElementById("adminPass").value;
-    if(val===ADMIN_PASS){
-        document.getElementById("loginResult").style.color="lime";
-        document.getElementById("loginResult").innerText="✅ Giriş başarılı!";
-        document.getElementById("lessonAdd").style.display="block";
-    } else {
-        document.getElementById("loginResult").style.color="red";
-        document.getElementById("loginResult").innerText="❌ Hatalı şifre!";
-    }
-}
-
-function addLesson(){
-    const isim=document.getElementById("lessonName").value;
-    const kategori=document.getElementById("lessonCategory").value;
-    const pdf=document.getElementById("lessonPDF").value;
-    if(isim && kategori && pdf){
-        lessons.push({kategori:kategori,isim:isim,pdf:pdf});
-        alert("Ders eklendi!");
-        updateCategories();
-        document.getElementById("lessonName").value="";
-        document.getElementById("lessonPDF").value="";
-    } else alert("Lütfen tüm alanları doldurun!");
-}
-
-// Başlangıçta kategori butonlarını yükle
-updateCategories();
-</script>
-
-</body>
-</html>
+const catDiv=document.getElementById("categories"); catDiv.innerHTML=""; 
+let cats=[...new Set(lessons.map(l=>l.kategori))]; 
+cats.forEach(c=>{ 
+let b=document.createElement("button"); 
+b.className="category-btn"; 
+b.innerText
