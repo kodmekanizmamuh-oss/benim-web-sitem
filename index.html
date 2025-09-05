@@ -7,20 +7,20 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 body { font-family:'Montserrat',sans-serif; margin:0; background:#0f0c29; background: linear-gradient(135deg,#0f0c29,#302b63,#24243e); color:white; overflow-x:hidden;}
-header { text-align:center; font-size:36px; font-weight:700; padding:30px; text-shadow: 0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff; animation: glow 2s infinite alternate;}
+header { text-align:center; font-size:36px; font-weight:700; padding:30px; text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff; animation: glow 2s infinite alternate;}
 @keyframes glow { from {text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff;} to {text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;} }
 .container { max-width:1200px; margin:20px auto; padding:20px; background: rgba(0,0,0,0.6); border-radius:20px; box-shadow:0 0 30px rgba(0,255,255,0.2);}
-h2 { color:#0ff; text-shadow:0 0 10px #0ff; }
+h2 { color:#0ff; text-shadow:0 0 10px #0ff; text-align:center; }
 button, .category-btn { cursor:pointer; transition: all 0.3s ease; border:none; border-radius:12px; font-weight:700; color:#000; background: linear-gradient(90deg,#0ff,#0ff,#0ff); padding:12px 22px; margin:6px; animation: float 3s ease-in-out infinite; text-shadow: 0 0 5px #0ff; }
-button:hover, .category-btn:hover { transform: translateY(-6px) scale(1.1); box-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;}
+button:hover, .category-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;}
 @keyframes float { 0%,100% {transform: translateY(0);} 50% {transform: translateY(-8px);} }
 .section { display:none; }
 .lesson { display:flex; justify-content:space-between; align-items:center; padding:12px; margin:8px 0; background:rgba(0,255,255,0.1); border-radius:12px; box-shadow:0 0 10px #0ff; transition:0.3s; }
 .lesson span { cursor:pointer; font-weight:600; color:#0ff; text-decoration:underline; }
 .lesson span:hover { color:#fff; text-shadow:0 0 10px #0ff; }
-.info-box { padding:18px; border-radius:12px; margin-bottom:25px; background: rgba(0,0,0,0.3); box-shadow:0 0 15px #0ff; }
+.info-box { padding:18px; border-radius:12px; margin-bottom:25px; background: rgba(0,0,0,0.3); box-shadow:0 0 15px #0ff; display:flex; flex-wrap:wrap; justify-content:center;}
 input, select { padding:10px; border-radius:8px; border:1px solid #0ff; margin-right:10px; background:rgba(0,0,0,0.5); color:white; }
-.admin-box { background: rgba(0,0,0,0.5); border:1px solid #0ff; padding:18px; border-radius:12px; margin-bottom:25px; box-shadow:0 0 15px #0ff; }
+.admin-box { background: rgba(0,0,0,0.5); border:1px solid #0ff; padding:18px; border-radius:12px; margin-bottom:25px; box-shadow:0 0 15px #0ff; text-align:center;}
 footer { text-align:center; padding:20px; margin-top:30px; background:#0f0c29; color:#0ff; border-radius:0 0 20px 20px; font-weight:700; font-size:15px;}
 @media (max-width:768px){ .lesson { flex-direction:column; align-items:flex-start; } .category-btn, button{ width:100%; margin:6px 0; } input, select{ width:100%; margin:6px 0; }}
 </style>
@@ -43,16 +43,16 @@ footer { text-align:center; padding:20px; margin-top:30px; background:#0f0c29; c
 <div id="lessons" class="section">
 <h2>📂 Dersler</h2>
 <div id="categories" class="info-box"></div>
-<div id="lessonsList" class="info-box"></div>
+<div id="lessonsList" class="info-box" style="flex-direction:column;"></div>
 <button onclick="show('home')">← Ana Sayfaya Dön</button>
 
 <h2>💳 Satın Alma & İletişim</h2>
-<div class="info-box">
-<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+<div class="info-box" style="flex-direction:column; align-items:flex-start;">
+<div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:10px;">
 <span><b>IBAN:</b> <span id="iban">TR98000670100000022363236</span></span>
 <button onclick="copyIban()">Kopyala</button>
 </div>
-<div style="display:flex; justify-content:space-between; align-items:center;">
+<div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
 <span><b>E-posta:</b> <span id="email">kodmekanizma.muh@gmail.com</span></span>
 </div>
 <small>Ödeme açıklamasına <i>ad-soyad + PDF adı</i> yazınız.</small>
@@ -122,19 +122,5 @@ function displayLessons(cat){
     lessons.filter(l=>l.kategori===cat).forEach(l=>{ 
         let div=document.createElement("div"); 
         div.className="lesson"; 
-        div.innerHTML=`<span onclick="alert('Ders: ${l.isim}')">${l.isim}</span>
-        <button onclick="alert('PDF satın al: ${l.pdf}')">PDF Satın Al</button>`; 
-        list.appendChild(div); 
-    }); 
-}
+        div.inner
 
-// Admin
-const ADMIN_PASS="2332";
-function loginAdmin(){
-    const val=document.getElementById("adminPass").value;
-    if(val===ADMIN_PASS){
-        document.getElementById("loginResult").style.color="lime";
-        document.getElementById("loginResult").innerText="✅ Giriş başarılı!";
-        document.getElementById("lessonAdd").style.display="block";
-    } else {
-        document.getElementById("
