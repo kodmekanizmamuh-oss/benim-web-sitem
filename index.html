@@ -1,362 +1,170 @@
+
 <!DOCTYPE html>
 <html lang="tr">
-<head><link rel="stylesheet" href="style.css">
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yetiş Ders Portalı</title>
-
-  <!-- Tek dosyalık CSS (canlı gradient + modern görünüm) -->
   <style>
-    :root{
-      --radius:20px;
-      --glass: rgba(255,255,255,.14);
-      --glass-strong: rgba(255,255,255,.25);
-      --shadow: 0 10px 30px rgba(0,0,0,.15);
-      --txt: #1a1a1a;
-      --white: #fff;
-      --brand1:#ff4fd8; --brand2:#6a5af9; --brand3:#00e5ff; --brand4:#1de9b6; --brand5:#ff9100;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom right, #74ebd5, #ACB6E5);
+      color: #333;
     }
-
-    html{scroll-behavior:smooth}
-    *{box-sizing:border-box}
-
-    body{
-      margin:0; color:var(--txt);
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: linear-gradient(120deg,var(--brand1),var(--brand2),var(--brand3),var(--brand4),var(--brand5));
-      background-size: 500% 500%;
-      animation: bgMove 18s ease-in-out infinite;
+    header {
+      background: linear-gradient(90deg, #9C27B0, #2196F3);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
     }
-    @keyframes bgMove{
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #673AB7;
+      flex-wrap: wrap;
     }
-
-    /* NAVBAR */
-    .navbar{
-      position: sticky; top:0; z-index:9999;
-      display:flex; align-items:center; gap:16px; flex-wrap:wrap;
-      padding:12px 18px;
-      background: linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand3),var(--brand4),var(--brand5));
-      background-size:300% 300%; animation: navMove 10s linear infinite;
-      box-shadow: 0 10px 30px rgba(0,0,0,.2);
-      border-radius: 0 0 16px 16px;
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      display: block;
     }
-    @keyframes navMove{
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
+    nav a:hover {
+      background: #512DA8;
     }
-    .logo{font-weight:800; color:#fff; font-size:18px; white-space:nowrap}
-    .links{display:flex; gap:10px; flex:1; flex-wrap:wrap; justify-content:center}
-    .links a{
-      color:#fff; text-decoration:none; font-weight:700; padding:8px 14px; border-radius:12px;
-      transition:.25s; white-space:nowrap; backdrop-filter:saturate(120%);
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .links a:hover{background:rgba(255,255,255,.22); box-shadow:0 0 16px rgba(255,255,255,.5)}
-
-    header{
-      max-width:1100px; margin:26px auto 10px; padding:22px;
-      background:var(--glass); border-radius:var(--radius); backdrop-filter: blur(8px);
-      color:#fff; box-shadow:var(--shadow); text-align:center;
+    h2 {
+      margin-top: 0;
+      color: #3f51b5;
     }
-    header h1{margin:0 0 6px; font-size:34px}
-    header p{margin:0; font-size:16px; opacity:.95}
-
-    main{max-width:1100px; margin:16px auto; padding:10px}
-
-    .card{
-      background:var(--glass); color:#fff;
-      border-radius:var(--radius); padding:22px; margin:18px 0;
-      box-shadow:var(--shadow); backdrop-filter: blur(8px);
-      transition: transform .25s, box-shadow .25s;
+    .info-box {
+      background: #f0f4ff;
+      border: 1px solid #c5cae9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
     }
-    .card:hover{ transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,.22) }
-    .card h2{margin:0 0 14px; font-size:24px}
-
-    .btnrow{display:flex; flex-wrap:wrap; gap:10px}
-    .btn, .btn-outline{
-      display:inline-block; border:none; cursor:pointer; text-decoration:none; font-weight:700;
-      padding:10px 14px; border-radius:12px; transition:.25s;
+    .iban-box, .email-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #e8eaf6;
+      padding: 10px;
+      border-radius: 6px;
+      margin: 8px 0;
     }
-    .btn{
-      color:#fff;
-      background: linear-gradient(90deg,#7b1fa2,#ff4081,#00bcd4);
-      background-size:300% 300%;
+    .iban-box button {
+      background: #d81b60;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
     }
-    .btn:hover{transform:translateY(-2px) scale(1.03); background-position:right center; box-shadow:0 10px 22px rgba(0,0,0,.25)}
-    .btn-outline{
-      color:#fff; border:2px solid rgba(255,255,255,.5); background: transparent;
+    .iban-box button:hover {
+      background: #ad1457;
     }
-    .btn-outline:hover{background: var(--glass-strong)}
-
-    /* Ödeme & İletişim */
-    #contact p{margin:.4rem 0; font-size:16px}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; background:rgba(0,0,0,.25); padding:6px 10px; border-radius:10px}
-    .copy-wrap{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-
-    /* Admin */
-    #admin .row{display:flex; gap:10px; flex-wrap:wrap}
-    input[type="password"], input[type="text"]{
-      padding:10px 12px; border-radius:12px; border:2px solid rgba(255,255,255,.4);
-      background: rgba(255,255,255,.12); color:#fff; outline:none; min-width:220px;
+    .admin-box {
+      background: #fff3e0;
+      border: 1px solid #ffcc80;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
     }
-    input::placeholder{color:#f0f0f0}
-    .muted{opacity:.85; font-size:14px}
-
-    /* Eklenen dersler listesi */
-    #customList{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
-    .chip{
-      display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:100px;
-      background: rgba(0,0,0,.25); color:#fff;
+    input[type="password"] {
+      padding: 8px;
+      width: 200px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
-    .chip a{color:#fff; text-decoration:none; font-weight:700}
-    .chip button{background:transparent; border:none; color:#fff; cursor:pointer; font-weight:900}
-
-    footer{max-width:1100px; margin:20px auto 40px; padding:12px; text-align:center; color:#fff; opacity:.9}
-
-    /* Responsive */
-    @media (max-width:768px){
-      .links{justify-content:flex-start}
-      .logo{flex:1}
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      background: #673AB7;
+      color: white;
+      border-radius: 0 0 10px 10px;
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="logo">📘 Yetiş Ders Portalı</div>
-    <div class="links">
-      <a href="#matematik">Matematik</a>
-      <a href="#fizik">Fizik</a>
-      <a href="#kimya">Kimya</a>
-      <a href="#biyoloji">Biyoloji</a>
-      <a href="#cografya">Coğrafya</a>
-      <a href="#tarih">Tarih</a>
-      <a href="#yazilim">Yazılım</a>
-      <a href="#contact">Ödeme</a>
-    </div>
+  <header>📘 Yetiş Ders Portalı</header>
+
+  <nav>
+    <a href="#">Matematik</a>
+    <a href="#">Fizik</a>
+    <a href="#">Kimya</a>
+    <a href="#">Biyoloji</a>
+    <a href="#">Coğrafya</a>
+    <a href="#">Tarih</a>
+    <a href="#">Yazılım</a>
+    <a href="#">Ödeme</a>
   </nav>
 
-  <!-- KAHRAMAN ALAN -->
-  <header>
-    <h1>📚 Yetiş Eğitim Platformu</h1>
-    <p>9-10-11-12. sınıf ders notları + Yazılım konu anlatımları & PDF föy satışları</p>
-  </header>
-
-  <main>
-    <!-- MATEMATİK -->
-    <section id="matematik" class="card">
-      <h2>📐 Matematik</h2>
-      <div class="btnrow">
-        <a class="btn" href="pdf/9mat.pdf" target="_blank" download>9. Sınıf Matematik</a>
-        <a class="btn" href="pdf/10mat.pdf" target="_blank" download>10. Sınıf Matematik</a>
-        <a class="btn" href="pdf/11mat.pdf" target="_blank" download>11. Sınıf Matematik</a>
-        <a class="btn" href="pdf/12mat.pdf" target="_blank" download>12. Sınıf Matematik</a>
+  <div class="container">
+    <h2>💳 Satın Alma & İletişim</h2>
+    <div class="info-box">
+      <div class="iban-box">
+        <span><b>IBAN:</b> <span id="iban">TR98000670100000022363236</span></span>
+        <button onclick="copyIban()">Kopyala</button>
       </div>
-    </section>
-
-    <!-- FİZİK -->
-    <section id="fizik" class="card">
-      <h2>⚡ Fizik</h2>
-      <div class="btnrow">
-        <a class="btn" href="pdf/9fizik.pdf" target="_blank" download>9. Sınıf Fizik</a>
-        <a class="btn" href="pdf/10fizik.pdf" target="_blank" download>10. Sınıf Fizik</a>
-        <a class="btn" href="pdf/11fizik.pdf" target="_blank" download>11. Sınıf Fizik</a>
-        <a class="btn" href="pdf/12fizik.pdf" target="_blank" download>12. Sınıf Fizik</a>
+      <div class="email-box">
+        <span><b>E-posta:</b> <span id="email">kodmekanizma.muh@gmail.com</span></span>
       </div>
-    </section>
+      <small>Ödeme açıklamasına lütfen <i>ad-soyad + satın alınan PDF adı</i> yazınız.</small>
+    </div>
 
-    <!-- KİMYA -->
-    <section id="kimya" class="card">
-      <h2>🧪 Kimya</h2>
-      <div class="btnrow">
-        <a class="btn" href="pdf/9kimya.pdf" target="_blank" download>9. Sınıf Kimya</a>
-        <a class="btn" href="pdf/10kimya.pdf" target="_blank" download>10. Sınıf Kimya</a>
-        <a class="btn" href="pdf/11kimya.pdf" target="_blank" download>11. Sınıf Kimya</a>
-        <a class="btn" href="pdf/12kimya.pdf" target="_blank" download>12. Sınıf Kimya</a>
-      </div>
-    </section>
+    <h2>🔑 Ders Ekleme (Yalnızca Admin)</h2>
+    <div class="admin-box">
+      <input type="password" id="adminPass" placeholder="Şifreyi gir">
+      <button onclick="login()">Giriş Yap</button>
+      <p id="loginResult" style="color:red;"></p>
+    </div>
 
-    <!-- BİYOLOJİ -->
-    <section id="biyoloji" class="card">
-      <h2>🧬 Biyoloji</h2>
-      <div class="btnrow">
-        <a class="btn" href="pdf/9biyoloji.pdf" target="_blank" download>9. Sınıf Biyoloji</a>
-        <a class="btn" href="pdf/10biyoloji.pdf" target="_blank" download>10. Sınıf Biyoloji</a>
-        <a class="btn" href="pdf/11biyoloji.pdf" target="_blank" download>11. Sınıf Biyoloji</a>
-        <a class="btn" href="pdf/12biyoloji.pdf" target="_blank" download>12. Sınıf Biyoloji</a>
-      </div>
-    </section>
-
-    <!-- COĞRAFYA -->
-    <section id="cografya" class="card">
-      <h2>🌍 Coğrafya</h2>
-      <div class="btnrow">
-        <a class="btn" href="pdf/9cografya.pdf" target="_blank" download>9. Sınıf Coğrafya</a>
-        <a class="btn" href="pdf/10cografya.pdf" target="_blank" download>10. Sınıf Coğrafya</a>
-        <a class="btn" href="pdf/11cografya.pdf" target="_blank" download>11. Sınıf Coğrafya</a>
-        <a class="btn" href="pdf/12cografya.pdf" target="_blank" download>12. Sınıf Coğrafya</a>
-      </div>
-    </section>
-
-    <!-- TARİH -->
-    <section id="tarih" class="card">
-      <h2>📜 Tarih</h2>
-      <div class="btnrow">
-        <a class="btn" href="pdf/9tarih.pdf" target="_blank" download>9. Sınıf Tarih</a>
-        <a class="btn" href="pdf/10tarih.pdf" target="_blank" download>10. Sınıf Tarih</a>
-        <a class="btn" href="pdf/11tarih.pdf" target="_blank" download>11. Sınıf Tarih</a>
-        <a class="btn" href="pdf/12tarih.pdf" target="_blank" download>12. Sınıf Tarih</a>
-      </div>
-    </section>
-
-    <!-- YAZILIM -->
-    <section id="yazilim" class="card">
-      <h2>💻 Yazılım</h2>
-      <p class="muted">Konu anlatımı ve föyler</p>
-      <div class="btnrow" style="margin-bottom:8px">
-        <a class="btn-outline" href="pdf/yazilim_baslangic.pdf" target="_blank" download>Başlangıç</a>
-        <a class="btn-outline" href="pdf/yazilim_orta.pdf" target="_blank" download>Orta Seviye</a>
-        <a class="btn-outline" href="pdf/yazilim_ileri.pdf" target="_blank" download>İleri Seviye</a>
-      </div>
-      <div class="btnrow">
-        <a class="btn" href="pdf/python.pdf" target="_blank" download>Python</a>
-        <a class="btn" href="pdf/java.pdf" target="_blank" download>Java</a>
-        <a class="btn" href="pdf/csharp.pdf" target="_blank" download>C#</a>
-        <a class="btn" href="pdf/veritabani.pdf" target="_blank" download>Veritabanı</a>
-        <a class="btn" href="pdf/web.pdf" target="_blank" download>Web</a>
-      </div>
-    </section>
-
-    <!-- ÖDEME & İLETİŞİM -->
-    <section id="contact" class="card">
-      <h2>💳 Satın Alma & İletişim</h2>
-      <div class="copy-wrap">
-        <span><strong>IBAN:</strong></span>
-        <span id="ibanText" class="mono">TR980006701000000022363236</span>
-        <button class="btn" onclick="copyIBAN()">Kopyala</button>
-      </div>
-      <p><strong>E-posta:</strong> <a class="btn-outline" href="mailto:kodmekanizma.muh@gmail.com">kodmekanizma.muh@gmail.com</a></p>
-      <p class="muted">Ödeme açıklamasına lütfen <em>ad-soyad + satın alınan PDF adı</em> yazınız.</p>
-    </section>
-
-    <!-- ADMIN: SADECE SEN GÖR (Şifre: 2332) -->
-    <section id="admin" class="card">
-      <h2>🔐 Ders Ekleme (Yalnızca Admin)</h2>
-      <div id="loginBox" class="row">
-        <input type="password" id="adminPass" placeholder="Şifreyi gir (2332)">
-        <button class="btn" onclick="checkPass()">Giriş Yap</button>
-      </div>
-
-      <div id="adminPanel" style="display:none; margin-top:12px;">
-        <div class="row">
-          <input type="text" id="newTitle" placeholder="Ders başlığı (ör: TYT Deneme 1)">
-          <input type="text" id="newFile" placeholder="pdf dosya adı (ör: tyt1.pdf)">
-          <button class="btn" onclick="addCustom()">Ekle</button>
-        </div>
-        <p class="muted">Eklenen bağlantılar aşağıda görünür ve tarayıcıda kaydedilir (localStorage).</p>
-        <div id="customList"></div>
-      </div>
-    </section>
-
-    <!-- EKLENEN DERSLER (Kullanıcıya görünür) -->
-    <section class="card">
-      <h2>🗂️ Eklenen Dersler</h2>
-      <div id="customPublic" class="btnrow"></div>
-    </section>
-  </main>
+    <h2>📂 Eklenen Dersler</h2>
+    <div id="lessonsList" class="info-box">
+      Henüz ders eklenmedi.
+    </div>
+  </div>
 
   <footer>© 2025 Yetiş Eğitim Platformu</footer>
 
-  <!-- JS -->
   <script>
-    // IBAN kopyalama
-    function copyIBAN(){
-      const txt = document.getElementById('ibanText').innerText.trim();
-      navigator.clipboard.writeText(txt).then(()=>alert('IBAN kopyalandı: ' + txt));
+    function copyIban() {
+      const iban = document.getElementById("iban").innerText;
+      navigator.clipboard.writeText(iban).then(() => {
+        alert("IBAN kopyalandı: " + iban);
+      });
     }
 
-    // Admin giriş
-    function checkPass(){
-      const pass = document.getElementById('adminPass').value.trim();
-      if(pass === '2332'){
-        document.getElementById('loginBox').style.display='none';
-        document.getElementById('adminPanel').style.display='block';
-      }else{
-        alert('Hatalı şifre!');
+    function login() {
+      const password = document.getElementById("adminPass").value;
+      if (password === "2332") {
+        document.getElementById("loginResult").style.color = "green";
+        document.getElementById("loginResult").innerText = "✅ Giriş başarılı! Ders ekleyebilirsiniz.";
+      } else {
+        document.getElementById("loginResult").style.color = "red";
+        document.getElementById("loginResult").innerText = "❌ Hatalı şifre!";
       }
     }
-
-    // LocalStorage yardımcıları
-    const KEY='customLessons';
-    function loadCustom(){
-      try{ return JSON.parse(localStorage.getItem(KEY) || '[]'); }catch(e){ return []; }
-    }
-    function saveCustom(list){ localStorage.setItem(KEY, JSON.stringify(list)); renderCustom(); }
-
-    // Öğe ekle
-    function addCustom(){
-      const title = document.getElementById('newTitle').value.trim();
-      const file = document.getElementById('newFile').value.trim();
-      if(!title || !file){ alert('Başlık ve dosya adı gerekli.'); return; }
-      const list = loadCustom();
-      list.push({title, file});
-      saveCustom(list);
-      document.getElementById('newTitle').value='';
-      document.getElementById('newFile').value='';
-    }
-
-    // Öğe sil
-    function removeCustom(idx){
-      const list = loadCustom();
-      list.splice(idx,1);
-      saveCustom(list);
-    }
-
-    // Render: admin içi + herkese açık liste
-    function renderCustom(){
-      const list = loadCustom();
-
-      // Admin listesi (chip'ler)
-      const adminBox = document.getElementById('customList');
-      if(adminBox){
-        adminBox.innerHTML='';
-        list.forEach((it, i)=>{
-          const chip = document.createElement('div');
-          chip.className='chip';
-          const a = document.createElement('a');
-          a.href = 'pdf/' + it.file;
-          a.target='_blank';
-          a.download='';
-          a.textContent = it.title;
-          const del = document.createElement('button');
-          del.title='Sil'; del.textContent='×';
-          del.onclick = ()=>removeCustom(i);
-          chip.appendChild(a); chip.appendChild(del);
-          adminBox.appendChild(chip);
-        });
-      }
-
-      // Herkese açık düğmeler
-      const pub = document.getElementById('customPublic');
-      if(pub){
-        pub.innerHTML='';
-        list.forEach(it=>{
-          const a = document.createElement('a');
-          a.className='btn';
-          a.href='pdf/' + it.file; a.target='_blank'; a.download='';
-          a.textContent = it.title;
-          pub.appendChild(a);
-        });
-      }
-    }
-
-    // İlk yüklemede kullanıcıya ait eklenenleri göster
-    renderCustom();
   </script>
+
 </body>
 </html>
