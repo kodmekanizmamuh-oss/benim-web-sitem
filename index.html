@@ -17,11 +17,13 @@ h2 { margin-top:0; color:#3f51b5; }
 .iban-box button, .lesson button { background:#d81b60; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer; margin-left:5px;}
 .iban-box button:hover, .lesson button:hover { background:#ad1457; }
 .admin-box { background:#fff3e0; border:1px solid #ffcc80; padding:15px; border-radius:8px; margin-bottom:20px; }
-input[type="password"], input[type="text"] { padding:8px; width:200px; border-radius:5px; border:1px solid #ccc; margin-right:10px; }
+input[type="password"], input[type="text"], select { padding:8px; border-radius:5px; border:1px solid #ccc; margin-right:10px; }
 button { padding:8px 14px; border:none; border-radius:5px; cursor:pointer; }
 footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; color:white; border-radius:0 0 10px 10px; }
 #lessonInputContainer { margin-top:10px; display:none; }
 .lesson { display:flex; justify-content:space-between; align-items:center; margin:5px 0; padding:5px 0; border-bottom:1px solid #ccc;}
+.lesson span { cursor:pointer; text-decoration:underline; color:#333;}
+.lesson span:hover { color:#2196F3;}
 </style>
 </head>
 <body>
@@ -61,6 +63,15 @@ footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; c
 
 <div id="lessonInputContainer">
 <input type="text" id="lessonName" placeholder="Ders adı">
+<select id="lessonCategory">
+<option value="9. Sınıf">9. Sınıf</option>
+<option value="10. Sınıf">10. Sınıf</option>
+<option value="11. Sınıf">11. Sınıf</option>
+<option value="12. Sınıf">12. Sınıf</option>
+<option value="Yazılım">Yazılım</option>
+<option value="Office">Office</option>
+</select>
+<input type="text" id="lessonPDF" placeholder="PDF dosya adı (örn: ders.pdf)">
 <button onclick="addLesson()">Ders Ekle</button>
 </div>
 </div>
@@ -92,8 +103,8 @@ function login() {
   }
 }
 
-// Ön tanımlı dersler
-const lessons = [
+// Ders listesi
+let lessons = [
   {kategori:"9. Sınıf", isim:"Matematik 9", pdf:"matematik9.pdf"},
   {kategori:"9. Sınıf", isim:"Fizik 9", pdf:"fizik9.pdf"},
   {kategori:"10. Sınıf", isim:"Kimya 10", pdf:"kimya10.pdf"},
@@ -110,37 +121,45 @@ const lessons = [
 
 function displayLessons(){
   const list = document.getElementById("lessonsList");
-  list.innerHTML = "";
+  list.innerHTML="";
   let currentCat="";
   lessons.forEach(lesson=>{
     if(lesson.kategori!==currentCat){
-      const h3 = document.createElement("h3");
+      const h3=document.createElement("h3");
       h3.innerText=lesson.kategori;
       list.appendChild(h3);
       currentCat=lesson.kategori;
     }
-    const div = document.createElement("div");
+    const div=document.createElement("div");
     div.className="lesson";
-    div.innerHTML=`<span>${lesson.isim}</span><button onclick="buyPDF('${lesson.pdf}')">PDF Satın Al</button>`;
+    div.innerHTML=`<span onclick="viewLesson('${lesson.isim}')">${lesson.isim}</span><button onclick="buyPDF('${lesson.pdf}')">PDF Satın Al</button>`;
     list.appendChild(div);
   });
 }
 
-// PDF Satın Alma Butonu
+// PDF satın alma
 function buyPDF(pdf){
   const iban=document.getElementById("iban").innerText;
   const email=document.getElementById("email").innerText;
   alert(`Ödeme için IBAN: ${iban}\nE-posta: ${email}\nSatın almak istediğiniz PDF: ${pdf}`);
 }
 
-// Admin ekleme
+// Ders içerik gösterme (çalışma)
+function viewLesson(name){
+  alert(`${name} ders içeriği burada gösterilebilir.`);
+}
+
+// Admin ders ekleme
 function addLesson(){
   const name=document.getElementById("lessonName").value.trim();
-  if(!name) return alert("Lütfen ders adı girin.");
-  const newLesson={kategori:"Eklenen Ders", isim:name, pdf:name+".pdf"};
+  const cat=document.getElementById("lessonCategory").value;
+  const pdf=document.getElementById("lessonPDF").value.trim();
+  if(!name || !pdf) return alert("Lütfen ders adı ve PDF dosya adını girin.");
+  const newLesson={kategori:cat, isim:name, pdf:pdf};
   lessons.push(newLesson);
   displayLessons();
   document.getElementById("lessonName").value="";
+  document.getElementById("lessonPDF").value="";
 }
 
 // LocalStorage ile kalıcı
