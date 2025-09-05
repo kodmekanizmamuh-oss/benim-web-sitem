@@ -5,149 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YAZILIMCI</title>
 <style>
-/* 🔹 Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-/* 🔹 Genel Ayarlar */
 body {
-  font-family:'Montserrat',sans-serif;
-  margin:0;
+  font-family:'Montserrat',sans-serif; margin:0;
   background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
   color:white;
 }
-
-/* 🔹 Header Neon Efekt */
 header {
-  text-align:center;
-  font-size:40px;
-  font-weight:700;
+  text-align:center; font-size:40px; font-weight:700;
   padding:30px;
   text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff;
   animation: glow 2s infinite alternate;
 }
-@keyframes glow {
-  from { text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff; }
-  to   { text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff; }
-}
-
-/* 🔹 Container */
-.container {
-  max-width:1200px;
-  margin:20px auto;
-  padding:20px;
-  background: rgba(0,0,0,0.7);
-  border-radius:20px;
-  box-shadow:0 0 30px rgba(0,255,255,0.2);
-}
-
-/* 🔹 Başlıklar */
-h2 { 
-  color:#0ff;
-  text-align:center;
-  text-shadow:0 0 10px #0ff;
-  margin-top:0;
-}
-
-/* 🔹 Butonlar ve Kategori Butonları */
-button, .category-btn {
-  cursor:pointer;
-  transition: all 0.3s ease;
-  border:none;
-  border-radius:12px;
-  font-weight:700;
-  color:#000;
-  background: linear-gradient(90deg,#0ff,#0ff,#0ff);
-  padding:12px 22px;
-  margin:6px;
-  animation: float 3s ease-in-out infinite;
-  text-shadow: 0 0 5px #0ff;
-}
-button:hover, .category-btn:hover {
-  transform: translateY(-8px) scale(1.1);
-  box-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;
-}
-@keyframes float {
-  0%,100% {transform: translateY(0);}
-  50% {transform: translateY(-8px);}
-}
-
-/* 🔹 Bölümler */
+@keyframes glow { from { text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff; } 
+to { text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff; } }
+.container { max-width:1200px; margin:20px auto; padding:20px; background: rgba(0,0,0,0.7); border-radius:20px; box-shadow:0 0 30px rgba(0,255,255,0.2);}
+h2 { color:#0ff; text-align:center; text-shadow:0 0 10px #0ff; margin-top:0; }
+button, .category-btn { cursor:pointer; transition: all 0.3s ease; border:none; border-radius:12px; font-weight:700; color:#000; background: linear-gradient(90deg,#0ff,#0ff,#0ff); padding:12px 22px; margin:6px; animation: float 3s ease-in-out infinite; text-shadow: 0 0 5px #0ff;}
+button:hover, .category-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;}
+@keyframes float { 0%,100% {transform: translateY(0);} 50% {transform: translateY(-8px);} }
 .section { display:none; }
-
-/* 🔹 Ders Kartları */
-.lesson {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px;
-  margin:8px 0;
-  background:rgba(0,255,255,0.1);
-  border-radius:12px;
-  box-shadow:0 0 10px #0ff;
-  transition:0.3s;
-}
-.lesson span {
-  cursor:pointer;
-  font-weight:600;
-  color:#0ff;
-  text-decoration:underline;
-}
-.lesson span:hover {
-  color:#fff;
-  text-shadow:0 0 10px #0ff;
-}
-
-/* 🔹 Bilgi Kutuları */
-.info-box {
-  padding:18px;
-  border-radius:12px;
-  margin-bottom:25px;
-  background: rgba(0,0,0,0.3);
-  box-shadow:0 0 15px #0ff;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-/* 🔹 Inputlar ve Select */
-input, select {
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #0ff;
-  margin-right:10px;
-  background:rgba(0,0,0,0.5);
-  color:white;
-}
-
-/* 🔹 Admin Kutusu */
-.admin-box {
-  background: rgba(0,0,0,0.5);
-  border:1px solid #0ff;
-  padding:18px;
-  border-radius:12px;
-  margin-bottom:25px;
-  box-shadow:0 0 15px #0ff;
-  text-align:center;
-}
-
-/* 🔹 Footer */
-footer {
-  text-align:center;
-  padding:20px;
-  margin-top:30px;
-  background:#0f0c29;
-  color:#0ff;
-  border-radius:0 0 20px 20px;
-  font-weight:700;
-  font-size:15px;
-}
-
-/* 🔹 Responsive */
-@media (max-width:768px){
-  .lesson { flex-direction:column; align-items:flex-start; }
-  .category-btn, button{ width:100%; margin:6px 0; }
-  input, select{ width:100%; margin:6px 0; }
-}
+.lesson { display:flex; justify-content:space-between; align-items:center; padding:12px; margin:8px 0; background:rgba(0,255,255,0.1); border-radius:12px; box-shadow:0 0 10px #0ff; transition:0.3s; }
+.lesson span { cursor:pointer; font-weight:600; color:#0ff; text-decoration:underline; }
+.lesson span:hover { color:#fff; text-shadow:0 0 10px #0ff; }
+.info-box { padding:18px; border-radius:12px; margin-bottom:25px; background: rgba(0,0,0,0.3); box-shadow:0 0 15px #0ff; display:flex; flex-wrap:wrap; justify-content:center;}
+input, select { padding:10px; border-radius:8px; border:1px solid #0ff; margin-right:10px; background:rgba(0,0,0,0.5); color:white; }
+.admin-box { background: rgba(0,0,0,0.5); border:1px solid #0ff; padding:18px; border-radius:12px; margin-bottom:25px; box-shadow:0 0 15px #0ff; text-align:center;}
+footer { text-align:center; padding:20px; margin-top:30px; background:#0f0c29; color:#0ff; border-radius:0 0 20px 20px; font-weight:700; font-size:15px;}
+@media (max-width:768px){ .lesson { flex-direction:column; align-items:flex-start; } .category-btn, button{ width:100%; margin:6px 0; } input, select{ width:100%; margin:6px 0; }}
 </style>
 </head>
 <body>
@@ -156,15 +42,13 @@ footer {
 
 <div class="container">
 
-<!-- Ana Sayfa -->
 <div id="home" class="section" style="display:block; text-align:center;">
 <h2>Hoşgeldiniz!</h2>
 <p>Ders portalımıza hoşgeldiniz. Dersleri görüntülemek veya admin girişi yapmak için butonlara tıklayın.</p>
-<button onclick="show('lessons')">Derslere Git</button>
+<button onclick="show('lessons'); updateCategories();">Derslere Git</button>
 <button onclick="show('admin')">Admin Girişi</button>
 </div>
 
-<!-- Dersler -->
 <div id="lessons" class="section">
 <h2>📂 Dersler</h2>
 <div id="categories" class="info-box"></div>
@@ -184,7 +68,6 @@ footer {
 </div>
 </div>
 
-<!-- Admin -->
 <div id="admin" class="section">
 <h2>🔑 Admin Paneli</h2>
 <div class="admin-box">
@@ -205,23 +88,12 @@ footer {
 </div>
 
 </div>
-
 <footer>© 2025 YAZILIMCI</footer>
 
 <script>
-// 🔹 Bölüm geçişi
-function show(id){
-  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-  document.getElementById(id).style.display='block';
-}
+function show(id){document.querySelectorAll('.section').forEach(s=>s.style.display='none');document.getElementById(id).style.display='block';}
+function copyIban(){navigator.clipboard.writeText(document.getElementById("iban").innerText).then(()=>alert("IBAN kopyalandı"));}
 
-// 🔹 IBAN kopyalama
-function copyIban(){
-  navigator.clipboard.writeText(document.getElementById("iban").innerText)
-  .then(()=>alert("IBAN kopyalandı"));
-}
-
-// 🔹 Ders verileri
 let lessons=[
 {kategori:"9. Sınıf",isim:"Matematik",pdf:"pdfler/matematik9.pdf"},
 {kategori:"9. Sınıf",isim:"Fizik",pdf:"pdfler/fizik9.pdf"},
@@ -245,10 +117,8 @@ let lessons=[
 {kategori:"Office",isim:"Word",pdf:"pdfler/word.pdf"}
 ];
 
-// 🔹 Kategorileri göster
 function updateCategories(){
-  const catDiv=document.getElementById("categories");
-  catDiv.innerHTML="";
+  const catDiv=document.getElementById("categories"); catDiv.innerHTML="";
   let cats=[...new Set(lessons.map(l=>l.kategori))];
   cats.forEach(c=>{
     let b=document.createElement("button");
@@ -259,10 +129,8 @@ function updateCategories(){
   });
 }
 
-// 🔹 Kategoriye göre dersleri göster
 function showLessons(cat){
-  const listDiv=document.getElementById("lessonsList");
-  listDiv.innerHTML="";
+  const listDiv=document.getElementById("lessonsList"); listDiv.innerHTML="";
   lessons.filter(l=>l.kategori===cat).forEach(l=>{
     let div=document.createElement("div"); div.className="lesson";
     let nameSpan=document.createElement("span"); nameSpan.innerText=l.isim;
@@ -272,7 +140,6 @@ function showLessons(cat){
   });
 }
 
-// 🔹 Admin Girişi
 function loginAdmin(){
   const pass=document.getElementById("adminPass").value;
   if(pass==="2332"){
@@ -285,7 +152,6 @@ function loginAdmin(){
   }
 }
 
-// 🔹 Ders ekleme
 function addLesson(){
   const name=document.getElementById("lessonName").value.trim();
   const cat=document.getElementById("lessonCategory").value;
@@ -296,5 +162,11 @@ function addLesson(){
     alert("Ders eklendi!");
     document.getElementById("lessonName").value="";
     document.getElementById("lessonPDF").value="";
-  } else {
-    alert("Lütfen ders adı ve PDF
+  } else alert("Lütfen ders adı ve PDF dosya adını girin!");
+}
+
+// Sayfa yüklendiğinde ana kategorileri oluştur
+window.onload=()=>updateCategories();
+</script>
+</body>
+</html>
