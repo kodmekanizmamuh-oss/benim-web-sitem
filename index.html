@@ -10,7 +10,7 @@ header { background: linear-gradient(90deg,#9C27B0,#2196F3); color:white; paddin
 nav { display:flex; justify-content:center; background:#673AB7; flex-wrap:wrap; }
 nav a { color:white; text-decoration:none; padding:12px 18px; display:block; }
 nav a:hover { background:#512DA8; }
-.container { max-width:900px; margin:20px auto; background:rgba(255,255,255,0.9); border-radius:10px; padding:20px; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
+.container { max-width:900px; margin:20px auto; background:rgba(255,255,255,0.95); border-radius:10px; padding:20px; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
 h2 { margin-top:0; color:#3f51b5; }
 .info-box { background:#f0f4ff; border:1px solid #c5cae9; padding:15px; border-radius:8px; margin-bottom:20px; }
 .iban-box, .email-box { display:flex; justify-content:space-between; align-items:center; background:#e8eaf6; padding:10px; border-radius:6px; margin:8px 0; }
@@ -24,6 +24,7 @@ footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; c
 .lesson { display:flex; justify-content:space-between; align-items:center; margin:5px 0; padding:5px 0; border-bottom:1px solid #ccc;}
 .lesson span { cursor:pointer; text-decoration:underline; color:#333;}
 .lesson span:hover { color:#2196F3;}
+.category-title { margin-top:15px; color:#9C27B0; font-weight:bold; }
 </style>
 </head>
 <body>
@@ -38,6 +39,7 @@ footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; c
 <a href="#">Coğrafya</a>
 <a href="#">Tarih</a>
 <a href="#">Yazılım</a>
+<a href="#">Office</a>
 <a href="#">Ödeme</a>
 </nav>
 
@@ -105,14 +107,22 @@ function login() {
 
 // Ders listesi
 let lessons = [
-  {kategori:"9. Sınıf", isim:"Matematik 9", pdf:"matematik9.pdf"},
-  {kategori:"9. Sınıf", isim:"Fizik 9", pdf:"fizik9.pdf"},
-  {kategori:"10. Sınıf", isim:"Kimya 10", pdf:"kimya10.pdf"},
-  {kategori:"10. Sınıf", isim:"Biyoloji 10", pdf:"biyoloji10.pdf"},
-  {kategori:"11. Sınıf", isim:"Matematik 11", pdf:"matematik11.pdf"},
-  {kategori:"11. Sınıf", isim:"Fizik 11", pdf:"fizik11.pdf"},
-  {kategori:"12. Sınıf", isim:"Kimya 12", pdf:"kimya12.pdf"},
-  {kategori:"12. Sınıf", isim:"Biyoloji 12", pdf:"biyoloji12.pdf"},
+  {kategori:"9. Sınıf", isim:"Matematik", pdf:"matematik9.pdf"},
+  {kategori:"9. Sınıf", isim:"Fizik", pdf:"fizik9.pdf"},
+  {kategori:"9. Sınıf", isim:"Kimya", pdf:"kimya9.pdf"},
+  {kategori:"9. Sınıf", isim:"Biyoloji", pdf:"biyoloji9.pdf"},
+  {kategori:"10. Sınıf", isim:"Matematik", pdf:"matematik10.pdf"},
+  {kategori:"10. Sınıf", isim:"Fizik", pdf:"fizik10.pdf"},
+  {kategori:"10. Sınıf", isim:"Kimya", pdf:"kimya10.pdf"},
+  {kategori:"10. Sınıf", isim:"Biyoloji", pdf:"biyoloji10.pdf"},
+  {kategori:"11. Sınıf", isim:"Matematik", pdf:"matematik11.pdf"},
+  {kategori:"11. Sınıf", isim:"Fizik", pdf:"fizik11.pdf"},
+  {kategori:"11. Sınıf", isim:"Kimya", pdf:"kimya11.pdf"},
+  {kategori:"11. Sınıf", isim:"Biyoloji", pdf:"biyoloji11.pdf"},
+  {kategori:"12. Sınıf", isim:"Matematik", pdf:"matematik12.pdf"},
+  {kategori:"12. Sınıf", isim:"Fizik", pdf:"fizik12.pdf"},
+  {kategori:"12. Sınıf", isim:"Kimya", pdf:"kimya12.pdf"},
+  {kategori:"12. Sınıf", isim:"Biyoloji", pdf:"biyoloji12.pdf"},
   {kategori:"Yazılım", isim:"Python", pdf:"python.pdf"},
   {kategori:"Yazılım", isim:"Java", pdf:"java.pdf"},
   {kategori:"Office", isim:"Excel", pdf:"excel.pdf"},
@@ -125,14 +135,16 @@ function displayLessons(){
   let currentCat="";
   lessons.forEach(lesson=>{
     if(lesson.kategori!==currentCat){
-      const h3=document.createElement("h3");
+      const h3=document.createElement("div");
+      h3.className="category-title";
       h3.innerText=lesson.kategori;
       list.appendChild(h3);
       currentCat=lesson.kategori;
     }
     const div=document.createElement("div");
     div.className="lesson";
-    div.innerHTML=`<span onclick="viewLesson('${lesson.isim}')">${lesson.isim}</span><button onclick="buyPDF('${lesson.pdf}')">PDF Satın Al</button>`;
+    div.innerHTML=`<span onclick="viewLesson('${lesson.isim}','${lesson.kategori}')">${lesson.isim}</span>
+    <button onclick="buyPDF('${lesson.pdf}')">PDF Satın Al</button>`;
     list.appendChild(div);
   });
 }
@@ -144,38 +156,5 @@ function buyPDF(pdf){
   alert(`Ödeme için IBAN: ${iban}\nE-posta: ${email}\nSatın almak istediğiniz PDF: ${pdf}`);
 }
 
-// Ders içerik gösterme (çalışma)
-function viewLesson(name){
-  alert(`${name} ders içeriği burada gösterilebilir.`);
-}
-
-// Admin ders ekleme
-function addLesson(){
-  const name=document.getElementById("lessonName").value.trim();
-  const cat=document.getElementById("lessonCategory").value;
-  const pdf=document.getElementById("lessonPDF").value.trim();
-  if(!name || !pdf) return alert("Lütfen ders adı ve PDF dosya adını girin.");
-  const newLesson={kategori:cat, isim:name, pdf:pdf};
-  lessons.push(newLesson);
-  displayLessons();
-  document.getElementById("lessonName").value="";
-  document.getElementById("lessonPDF").value="";
-}
-
-// LocalStorage ile kalıcı
-window.onload=function(){
-  if(localStorage.getItem("lessons")){
-    const saved=JSON.parse(localStorage.getItem("lessons"));
-    saved.forEach(l=>lessons.push(l));
-  }
-  displayLessons();
-}
-
-window.onbeforeunload=function(){
-  localStorage.setItem("lessons",JSON.stringify(lessons));
-}
-</script>
-
-</body>
-</html>
+// Ders içerik gösterme
 
