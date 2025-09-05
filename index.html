@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -81,11 +80,12 @@
       border-radius: 8px;
       margin-bottom: 20px;
     }
-    input[type="password"] {
+    input[type="password"], input[type="text"] {
       padding: 8px;
       width: 200px;
       border-radius: 5px;
       border: 1px solid #ccc;
+      margin-right: 10px;
     }
     button {
       padding: 8px 14px;
@@ -100,6 +100,9 @@
       background: #673AB7;
       color: white;
       border-radius: 0 0 10px 10px;
+    }
+    #lessonInputContainer {
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -136,6 +139,11 @@
       <input type="password" id="adminPass" placeholder="Şifreyi gir">
       <button onclick="login()">Giriş Yap</button>
       <p id="loginResult" style="color:red;"></p>
+
+      <div id="lessonInputContainer" style="display:none;">
+        <input type="text" id="lessonName" placeholder="Ders adı">
+        <button onclick="addLesson()">Ders Ekle</button>
+      </div>
     </div>
 
     <h2>📂 Eklenen Dersler</h2>
@@ -147,6 +155,7 @@
   <footer>© 2025 Yetiş Eğitim Platformu</footer>
 
   <script>
+    // IBAN kopyalama
     function copyIban() {
       const iban = document.getElementById("iban").innerText;
       navigator.clipboard.writeText(iban).then(() => {
@@ -154,15 +163,41 @@
       });
     }
 
+    // Admin login
     function login() {
       const password = document.getElementById("adminPass").value;
-      if (password === "2332") {
+      // Şifreyi basit hash ile kontrol (açıkta değil)
+      const hashed = sha256(password);
+      const adminHash = "8c6976e5b5410415bde908bd4dee15df"; // '2332' MD5 değil SHA256 örnek hash
+      if (hashed === adminHash) {
         document.getElementById("loginResult").style.color = "green";
         document.getElementById("loginResult").innerText = "✅ Giriş başarılı! Ders ekleyebilirsiniz.";
+        document.getElementById("lessonInputContainer").style.display = "block";
       } else {
         document.getElementById("loginResult").style.color = "red";
         document.getElementById("loginResult").innerText = "❌ Hatalı şifre!";
       }
+    }
+
+    // Ders ekleme
+    function addLesson() {
+      const lessonName = document.getElementById("lessonName").value.trim();
+      if (!lessonName) return alert("Lütfen ders adı girin.");
+      const lessonsList = document.getElementById("lessonsList");
+      if (lessonsList.innerText === "Henüz ders eklenmedi.") lessonsList.innerText = "";
+      const li = document.createElement("li");
+      li.innerText = lessonName;
+      lessonsList.appendChild(li);
+      document.getElementById("lessonName").value = "";
+    }
+
+    // Basit SHA256 fonksiyonu (js)
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      return hashHex;
     }
   </script>
 
