@@ -3,32 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yetiş Ders Portalı</title>
+<title>YAZILIMCI</title>
 <style>
 body { font-family: Arial,sans-serif; margin:0; background: linear-gradient(to bottom right,#74ebd5,#ACB6E5); color:#333; }
-header { background: linear-gradient(90deg,#9C27B0,#2196F3); color:white; padding:15px; text-align:center; font-size:20px; font-weight:bold; }
+header { background: linear-gradient(90deg,#9C27B0,#2196F3); color:white; padding:15px; text-align:center; font-size:22px; font-weight:bold; }
 .container { max-width:900px; margin:20px auto; background:rgba(255,255,255,0.95); border-radius:10px; padding:20px; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
 h2 { margin-top:0; color:#3f51b5; }
-.info-box { background:#f0f4ff; border:1px solid #c5cae9; padding:15px; border-radius:8px; margin-bottom:20px; }
-.iban-box, .email-box { display:flex; justify-content:space-between; align-items:center; background:#e8eaf6; padding:10px; border-radius:6px; margin:8px 0; }
-.iban-box button, .lesson button { background:#d81b60; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer; margin-left:5px; }
-.iban-box button:hover, .lesson button:hover { background:#ad1457; }
-.admin-box { background:#fff3e0; border:1px solid #ffcc80; padding:15px; border-radius:8px; margin-bottom:20px; }
-input[type="password"], input[type="text"], select { padding:8px; border-radius:5px; border:1px solid #ccc; margin-right:10px; }
-button { padding:8px 14px; border:none; border-radius:5px; cursor:pointer; }
-footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; color:white; border-radius:0 0 10px 10px; }
+button { padding:8px 14px; border:none; border-radius:5px; cursor:pointer; margin:5px; }
 .sınıf-btn { background:#2196F3; color:white; padding:8px 12px; border:none; border-radius:5px; margin:3px; cursor:pointer; }
 .sınıf-btn:hover { background:#1976D2; }
 .lesson { display:flex; justify-content:space-between; align-items:center; margin:5px 0; padding:5px 0; border-bottom:1px solid #ccc;}
 .lesson span { cursor:pointer; text-decoration:underline; color:#333;}
 .lesson span:hover { color:#2196F3;}
+.info-box { background:#f0f4ff; border:1px solid #c5cae9; padding:15px; border-radius:8px; margin-bottom:20px; }
+.iban-box, .email-box { display:flex; justify-content:space-between; align-items:center; background:#e8eaf6; padding:10px; border-radius:6px; margin:8px 0; }
+.admin-box { background:#fff3e0; border:1px solid #ffcc80; padding:15px; border-radius:8px; margin-bottom:20px; }
+input[type="password"], input[type="text"], select { padding:8px; border-radius:5px; border:1px solid #ccc; margin-right:10px; }
+footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; color:white; border-radius:0 0 10px 10px; }
+/* Bölümler gizleme/gösterme */
+.section { display:none; }
 </style>
 </head>
 <body>
 
-<header>📘 Yetiş Ders Portalı</header>
+<header>📘 YAZILIMCI</header>
 
 <div class="container">
+
+<!-- Ana Sayfa -->
+<div id="homeSection" class="section" style="display:block; text-align:center;">
+<h2>Hoşgeldiniz!</h2>
+<p>Ders Portalımıza hoşgeldiniz. Dersleri görüntülemek için aşağıya tıklayın.</p>
+<button onclick="showSection('lessonsSection')">Derslere Git</button>
+<button onclick="showSection('adminSection')">Admin Girişi</button>
+</div>
+
+<!-- Dersler Bölümü -->
+<div id="lessonsSection" class="section">
+<h2>📂 Dersler</h2>
+<div id="categoryButtons" class="info-box"></div>
+<div id="lessonsList" class="info-box"></div>
+<button onclick="showSection('homeSection')">← Ana Sayfaya Dön</button>
 
 <h2>💳 Satın Alma & İletişim</h2>
 <div class="info-box">
@@ -41,7 +56,10 @@ footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; c
 </div>
 <small>Ödeme açıklamasına lütfen <i>ad-soyad + satın alınan PDF adı</i> yazınız.</small>
 </div>
+</div>
 
+<!-- Admin Bölümü -->
+<div id="adminSection" class="section">
 <h2>🔑 Admin Paneli</h2>
 <div class="admin-box">
 <input type="password" id="adminPass" placeholder="Şifreyi gir">
@@ -61,17 +79,23 @@ footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; c
 <input type="text" id="lessonPDF" placeholder="PDF dosya adı (örn: ders.pdf)">
 <button onclick="addLesson()">Ders Ekle</button>
 </div>
+<button onclick="showSection('homeSection')">← Ana Sayfaya Dön</button>
 </div>
-
-<h2>📂 Dersler</h2>
-<div id="categoryButtons" class="info-box"></div>
-<div id="lessonsList" class="info-box"></div>
 
 </div>
 
-<footer>© 2025 Yetiş Eğitim Platformu</footer>
+</div>
+
+<footer>© 2025 YAZILIMCI</footer>
 
 <script>
+// Bölümler arası geçiş
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+  document.getElementById(id).style.display='block';
+}
+
+// Kopyala
 function copyIban() {
   const iban=document.getElementById("iban").innerText;
   navigator.clipboard.writeText(iban).then(()=>alert("IBAN kopyalandı: "+iban));
@@ -162,24 +186,5 @@ function addLesson(){
   if(!name||!pdf)return alert("Lütfen ders adı ve PDF dosya adını girin.");
   lessons.push({kategori:cat,isim:name,pdf:pdf});
   updateCategories();
-  displayLessons(cat);
-  document.getElementById("lessonName").value="";
-  document.getElementById("lessonPDF").value="";
-}
-
-// LocalStorage kalıcılık
-window.onload=function(){
-  if(localStorage.getItem("lessons")){
-    const saved=JSON.parse(localStorage.getItem("lessons"));
-    lessons=saved;
-  }
-  updateCategories();
-}
-window.onbeforeunload=function(){
-  localStorage.setItem("lessons",JSON.stringify(lessons));
-}
-</script>
-
-</body>
-</html>
+  displayLessons
 
