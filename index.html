@@ -1,205 +1,161 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yetiş Ders Portalı</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: linear-gradient(to bottom right, #74ebd5, #ACB6E5);
-      color: #333;
-    }
-    header {
-      background: linear-gradient(90deg, #9C27B0, #2196F3);
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background: #673AB7;
-      flex-wrap: wrap;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 12px 18px;
-      display: block;
-    }
-    nav a:hover {
-      background: #512DA8;
-    }
-    .container {
-      max-width: 900px;
-      margin: 20px auto;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    h2 {
-      margin-top: 0;
-      color: #3f51b5;
-    }
-    .info-box {
-      background: #f0f4ff;
-      border: 1px solid #c5cae9;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .iban-box, .email-box {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #e8eaf6;
-      padding: 10px;
-      border-radius: 6px;
-      margin: 8px 0;
-    }
-    .iban-box button {
-      background: #d81b60;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .iban-box button:hover {
-      background: #ad1457;
-    }
-    .admin-box {
-      background: #fff3e0;
-      border: 1px solid #ffcc80;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    input[type="password"], input[type="text"] {
-      padding: 8px;
-      width: 200px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      margin-right: 10px;
-    }
-    button {
-      padding: 8px 14px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      margin-top: 20px;
-      background: #673AB7;
-      color: white;
-      border-radius: 0 0 10px 10px;
-    }
-    #lessonInputContainer {
-      margin-top: 10px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yetiş Ders Portalı</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; background: linear-gradient(to bottom right,#74ebd5,#ACB6E5); color:#333; }
+header { background: linear-gradient(90deg,#9C27B0,#2196F3); color:white; padding:15px; text-align:center; font-size:20px; font-weight:bold; }
+nav { display:flex; justify-content:center; background:#673AB7; flex-wrap:wrap; }
+nav a { color:white; text-decoration:none; padding:12px 18px; display:block; }
+nav a:hover { background:#512DA8; }
+.container { max-width:900px; margin:20px auto; background:rgba(255,255,255,0.9); border-radius:10px; padding:20px; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
+h2 { margin-top:0; color:#3f51b5; }
+.info-box { background:#f0f4ff; border:1px solid #c5cae9; padding:15px; border-radius:8px; margin-bottom:20px; }
+.iban-box, .email-box { display:flex; justify-content:space-between; align-items:center; background:#e8eaf6; padding:10px; border-radius:6px; margin:8px 0; }
+.iban-box button, .lesson button { background:#d81b60; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer; margin-left:5px;}
+.iban-box button:hover, .lesson button:hover { background:#ad1457; }
+.admin-box { background:#fff3e0; border:1px solid #ffcc80; padding:15px; border-radius:8px; margin-bottom:20px; }
+input[type="password"], input[type="text"] { padding:8px; width:200px; border-radius:5px; border:1px solid #ccc; margin-right:10px; }
+button { padding:8px 14px; border:none; border-radius:5px; cursor:pointer; }
+footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; color:white; border-radius:0 0 10px 10px; }
+#lessonInputContainer { margin-top:10px; display:none; }
+.lesson { display:flex; justify-content:space-between; align-items:center; margin:5px 0; padding:5px 0; border-bottom:1px solid #ccc;}
+</style>
 </head>
 <body>
 
-  <header>📘 Yetiş Ders Portalı</header>
+<header>📘 Yetiş Ders Portalı</header>
 
-  <nav>
-    <a href="#">Matematik</a>
-    <a href="#">Fizik</a>
-    <a href="#">Kimya</a>
-    <a href="#">Biyoloji</a>
-    <a href="#">Coğrafya</a>
-    <a href="#">Tarih</a>
-    <a href="#">Yazılım</a>
-    <a href="#">Ödeme</a>
-  </nav>
+<nav>
+<a href="#">Matematik</a>
+<a href="#">Fizik</a>
+<a href="#">Kimya</a>
+<a href="#">Biyoloji</a>
+<a href="#">Coğrafya</a>
+<a href="#">Tarih</a>
+<a href="#">Yazılım</a>
+<a href="#">Ödeme</a>
+</nav>
 
-  <div class="container">
-    <h2>💳 Satın Alma & İletişim</h2>
-    <div class="info-box">
-      <div class="iban-box">
-        <span><b>IBAN:</b> <span id="iban">TR98000670100000022363236</span></span>
-        <button onclick="copyIban()">Kopyala</button>
-      </div>
-      <div class="email-box">
-        <span><b>E-posta:</b> <span id="email">kodmekanizma.muh@gmail.com</span></span>
-      </div>
-      <small>Ödeme açıklamasına lütfen <i>ad-soyad + satın alınan PDF adı</i> yazınız.</small>
-    </div>
+<div class="container">
 
-    <h2>🔑 Ders Ekleme (Yalnızca Admin)</h2>
-    <div class="admin-box">
-      <input type="password" id="adminPass" placeholder="Şifreyi gir">
-      <button onclick="login()">Giriş Yap</button>
-      <p id="loginResult" style="color:red;"></p>
+<h2>💳 Satın Alma & İletişim</h2>
+<div class="info-box">
+<div class="iban-box">
+<span><b>IBAN:</b> <span id="iban">TR98000670100000022363236</span></span>
+<button onclick="copyIban()">Kopyala</button>
+</div>
+<div class="email-box">
+<span><b>E-posta:</b> <span id="email">kodmekanizma.muh@gmail.com</span></span>
+</div>
+<small>Ödeme açıklamasına lütfen <i>ad-soyad + satın alınan PDF adı</i> yazınız.</small>
+</div>
 
-      <div id="lessonInputContainer" style="display:none;">
-        <input type="text" id="lessonName" placeholder="Ders adı">
-        <button onclick="addLesson()">Ders Ekle</button>
-      </div>
-    </div>
+<h2>🔑 Ders Ekleme (Yalnızca Admin)</h2>
+<div class="admin-box">
+<input type="password" id="adminPass" placeholder="Şifreyi gir">
+<button onclick="login()">Giriş Yap</button>
+<p id="loginResult" style="color:red;"></p>
 
-    <h2>📂 Eklenen Dersler</h2>
-    <div id="lessonsList" class="info-box">
-      Henüz ders eklenmedi.
-    </div>
-  </div>
+<div id="lessonInputContainer">
+<input type="text" id="lessonName" placeholder="Ders adı">
+<button onclick="addLesson()">Ders Ekle</button>
+</div>
+</div>
 
-  <footer>© 2025 Yetiş Eğitim Platformu</footer>
+<h2>📂 Dersler ve PDF Satışı</h2>
+<div id="lessonsList" class="info-box"></div>
 
-  <script>
-    // IBAN kopyalama
-    function copyIban() {
-      const iban = document.getElementById("iban").innerText;
-      navigator.clipboard.writeText(iban).then(() => {
-        alert("IBAN kopyalandı: " + iban);
-      });
+</div>
+
+<footer>© 2025 Yetiş Eğitim Platformu</footer>
+
+<script>
+function copyIban() {
+  const iban = document.getElementById("iban").innerText;
+  navigator.clipboard.writeText(iban).then(()=>alert("IBAN kopyalandı: "+iban));
+}
+
+// Admin login
+const ADMIN_PASS = "2332";
+function login() {
+  const pass = document.getElementById("adminPass").value;
+  if(pass===ADMIN_PASS){
+    document.getElementById("loginResult").style.color="green";
+    document.getElementById("loginResult").innerText="✅ Giriş başarılı! Ders ekleyebilirsiniz.";
+    document.getElementById("lessonInputContainer").style.display="block";
+  } else {
+    document.getElementById("loginResult").style.color="red";
+    document.getElementById("loginResult").innerText="❌ Hatalı şifre!";
+  }
+}
+
+// Ön tanımlı dersler
+const lessons = [
+  {kategori:"9. Sınıf", isim:"Matematik 9", pdf:"matematik9.pdf"},
+  {kategori:"9. Sınıf", isim:"Fizik 9", pdf:"fizik9.pdf"},
+  {kategori:"10. Sınıf", isim:"Kimya 10", pdf:"kimya10.pdf"},
+  {kategori:"10. Sınıf", isim:"Biyoloji 10", pdf:"biyoloji10.pdf"},
+  {kategori:"11. Sınıf", isim:"Matematik 11", pdf:"matematik11.pdf"},
+  {kategori:"11. Sınıf", isim:"Fizik 11", pdf:"fizik11.pdf"},
+  {kategori:"12. Sınıf", isim:"Kimya 12", pdf:"kimya12.pdf"},
+  {kategori:"12. Sınıf", isim:"Biyoloji 12", pdf:"biyoloji12.pdf"},
+  {kategori:"Yazılım", isim:"Python", pdf:"python.pdf"},
+  {kategori:"Yazılım", isim:"Java", pdf:"java.pdf"},
+  {kategori:"Office", isim:"Excel", pdf:"excel.pdf"},
+  {kategori:"Office", isim:"Word", pdf:"word.pdf"}
+];
+
+function displayLessons(){
+  const list = document.getElementById("lessonsList");
+  list.innerHTML = "";
+  let currentCat="";
+  lessons.forEach(lesson=>{
+    if(lesson.kategori!==currentCat){
+      const h3 = document.createElement("h3");
+      h3.innerText=lesson.kategori;
+      list.appendChild(h3);
+      currentCat=lesson.kategori;
     }
+    const div = document.createElement("div");
+    div.className="lesson";
+    div.innerHTML=`<span>${lesson.isim}</span><button onclick="buyPDF('${lesson.pdf}')">PDF Satın Al</button>`;
+    list.appendChild(div);
+  });
+}
 
-    // Admin login
-    function login() {
-      const password = document.getElementById("adminPass").value;
-      // Şifreyi basit hash ile kontrol (açıkta değil)
-      const hashed = sha256(password);
-      const adminHash = "8c6976e5b5410415bde908bd4dee15df"; // '2332' MD5 değil SHA256 örnek hash
-      if (hashed === adminHash) {
-        document.getElementById("loginResult").style.color = "green";
-        document.getElementById("loginResult").innerText = "✅ Giriş başarılı! Ders ekleyebilirsiniz.";
-        document.getElementById("lessonInputContainer").style.display = "block";
-      } else {
-        document.getElementById("loginResult").style.color = "red";
-        document.getElementById("loginResult").innerText = "❌ Hatalı şifre!";
-      }
-    }
+// PDF Satın Alma Butonu
+function buyPDF(pdf){
+  const iban=document.getElementById("iban").innerText;
+  const email=document.getElementById("email").innerText;
+  alert(`Ödeme için IBAN: ${iban}\nE-posta: ${email}\nSatın almak istediğiniz PDF: ${pdf}`);
+}
 
-    // Ders ekleme
-    function addLesson() {
-      const lessonName = document.getElementById("lessonName").value.trim();
-      if (!lessonName) return alert("Lütfen ders adı girin.");
-      const lessonsList = document.getElementById("lessonsList");
-      if (lessonsList.innerText === "Henüz ders eklenmedi.") lessonsList.innerText = "";
-      const li = document.createElement("li");
-      li.innerText = lessonName;
-      lessonsList.appendChild(li);
-      document.getElementById("lessonName").value = "";
-    }
+// Admin ekleme
+function addLesson(){
+  const name=document.getElementById("lessonName").value.trim();
+  if(!name) return alert("Lütfen ders adı girin.");
+  const newLesson={kategori:"Eklenen Ders", isim:name, pdf:name+".pdf"};
+  lessons.push(newLesson);
+  displayLessons();
+  document.getElementById("lessonName").value="";
+}
 
-    // Basit SHA256 fonksiyonu (js)
-    async function sha256(message) {
-      const msgBuffer = new TextEncoder().encode(message);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      return hashHex;
-    }
-  </script>
+// LocalStorage ile kalıcı
+window.onload=function(){
+  if(localStorage.getItem("lessons")){
+    const saved=JSON.parse(localStorage.getItem("lessons"));
+    saved.forEach(l=>lessons.push(l));
+  }
+  displayLessons();
+}
+
+window.onbeforeunload=function(){
+  localStorage.setItem("lessons",JSON.stringify(lessons));
+}
+</script>
 
 </body>
 </html>
