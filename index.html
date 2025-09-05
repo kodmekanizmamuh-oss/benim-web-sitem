@@ -6,22 +6,23 @@
 <title>YAZILIMCI</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-body { font-family:'Montserrat',sans-serif; margin:0; background: linear-gradient(135deg,#74ebd5,#ACB6E5); }
-header { background: linear-gradient(90deg,#6a11cb,#2575fc); color:white; padding:25px; text-align:center; font-size:28px; font-weight:700; text-shadow:2px 2px 4px #000; }
-.container { max-width:1100px; margin:20px auto; padding:25px; background: rgba(255,255,255,0.95); border-radius:20px; box-shadow:0 12px 24px rgba(0,0,0,0.2); }
-h2 { color:#2575fc; margin-top:0; }
-button, .category-btn { cursor:pointer; transition: all 0.3s ease; }
-button:hover, .category-btn:hover { transform: scale(1.05); box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+body { font-family:'Montserrat',sans-serif; margin:0; background:#0f0c29; background: linear-gradient(135deg,#0f0c29,#302b63,#24243e); color:white; overflow-x:hidden;}
+header { text-align:center; font-size:36px; font-weight:700; padding:30px; text-shadow: 0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff; animation: glow 2s infinite alternate;}
+@keyframes glow { from {text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff;} to {text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;} }
+.container { max-width:1200px; margin:20px auto; padding:20px; background: rgba(0,0,0,0.6); border-radius:20px; box-shadow:0 0 30px rgba(0,255,255,0.2);}
+h2 { color:#0ff; text-shadow:0 0 10px #0ff; }
+button, .category-btn { cursor:pointer; transition: all 0.3s ease; border:none; border-radius:12px; font-weight:700; }
+button:hover, .category-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow:0 0 20px #0ff,0 0 40px #0ff; }
+button, .category-btn { padding:12px 22px; margin:6px; background: linear-gradient(90deg,#0ff,#0ff,#0ff); color:#000; text-shadow:none; animation: float 3s ease-in-out infinite;}
+@keyframes float { 0%,100% {transform: translateY(0);} 50% {transform: translateY(-6px);} }
 .section { display:none; }
-button { padding:12px 20px; border:none; border-radius:10px; background:#6a11cb; color:white; font-weight:700; margin:5px; font-size:16px; }
-.category-btn { background:#2575fc; color:white; padding:12px 18px; border-radius:10px; margin:5px; font-weight:700; font-size:15px; }
-.lesson { display:flex; justify-content:space-between; align-items:center; padding:12px; margin:8px 0; background:#f0f4ff; border-radius:12px; box-shadow:0 3px 8px rgba(0,0,0,0.1); transition:0.3s;}
-.lesson span { cursor:pointer; font-weight:600; color:#333; text-decoration:underline; }
-.lesson span:hover { color:#2575fc; }
-.info-box { padding:18px; border-radius:12px; margin-bottom:25px; background:#e0f7fa; box-shadow:0 3px 8px rgba(0,0,0,0.1);}
-input, select { padding:10px; border-radius:8px; border:1px solid #ccc; margin-right:10px; font-size:14px; }
-.admin-box { background:#fff3e0; border:1px solid #ffcc80; padding:18px; border-radius:12px; margin-bottom:25px; box-shadow:0 3px 8px rgba(0,0,0,0.1);}
-footer { text-align:center; padding:20px; margin-top:30px; background:#2575fc; color:white; border-radius:0 0 20px 20px; font-weight:700; font-size:15px;}
+.lesson { display:flex; justify-content:space-between; align-items:center; padding:12px; margin:8px 0; background:rgba(0,255,255,0.1); border-radius:12px; box-shadow:0 0 10px #0ff; transition:0.3s; }
+.lesson span { cursor:pointer; font-weight:600; color:#0ff; text-decoration:underline; }
+.lesson span:hover { color:#fff; text-shadow:0 0 10px #0ff; }
+.info-box { padding:18px; border-radius:12px; margin-bottom:25px; background: rgba(0,0,0,0.3); box-shadow:0 0 15px #0ff; }
+input, select { padding:10px; border-radius:8px; border:1px solid #0ff; margin-right:10px; background:rgba(0,0,0,0.5); color:white; }
+.admin-box { background: rgba(0,0,0,0.5); border:1px solid #0ff; padding:18px; border-radius:12px; margin-bottom:25px; box-shadow:0 0 15px #0ff; }
+footer { text-align:center; padding:20px; margin-top:30px; background:#0f0c29; color:#0ff; border-radius:0 0 20px 20px; font-weight:700; font-size:15px;}
 @media (max-width:768px){ .lesson { flex-direction:column; align-items:flex-start; } .category-btn, button{ width:100%; margin:6px 0; } input, select{ width:100%; margin:6px 0; }}
 </style>
 </head>
@@ -45,6 +46,7 @@ footer { text-align:center; padding:20px; margin-top:30px; background:#2575fc; c
 <div id="categories" class="info-box"></div>
 <div id="lessonsList" class="info-box"></div>
 <button onclick="show('home')">← Ana Sayfaya Dön</button>
+
 <h2>💳 Satın Alma & İletişim</h2>
 <div class="info-box">
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
@@ -84,63 +86,70 @@ footer { text-align:center; padding:20px; margin-top:30px; background:#2575fc; c
 
 <script>
 // Bölüm geçişi
-function show(id){
-  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-  document.getElementById(id).style.display='block';
-}
-
+function show(id){ document.querySelectorAll('.section').forEach(s=>s.style.display='none'); document.getElementById(id).style.display='block'; }
 // IBAN kopyala
 function copyIban(){navigator.clipboard.writeText(document.getElementById("iban").innerText).then(()=>alert("IBAN kopyalandı"));}
-
 // Ders listesi
 let lessons = [
 {kategori:"9. Sınıf",isim:"Matematik",pdf:"matematik9.pdf"},
 {kategori:"9. Sınıf",isim:"Fizik",pdf:"fizik9.pdf"},
 {kategori:"10. Sınıf",isim:"Matematik",pdf:"matematik10.pdf"},
+{kategori:"10. Sınıf",isim:"Fizik",pdf:"fizik10.pdf"},
+{kategori:"11. Sınıf",isim:"Matematik",pdf:"matematik11.pdf"},
+{kategori:"11. Sınıf",isim:"Fizik",pdf:"fizik11.pdf"},
+{kategori:"12. Sınıf",isim:"Matematik",pdf:"matematik12.pdf"},
+{kategori:"12. Sınıf",isim:"Fizik",pdf:"fizik12.pdf"},
 {kategori:"Yazılım",isim:"Python",pdf:"python.pdf"},
-{kategori:"Office",isim:"Excel",pdf:"excel.pdf"}
+{kategori:"Yazılım",isim:"Java",pdf:"java.pdf"},
+{kategori:"Office",isim:"Excel",pdf:"excel.pdf"},
+{kategori:"Office",isim:"Word",pdf:"word.pdf"}
 ];
 
-function updateCategories(){
-  const catDiv=document.getElementById("categories"); catDiv.innerHTML="";
-  let cats=[...new Set(lessons.map(l=>l.kategori))];
-  cats.forEach(c=>{
-    let b=document.createElement("button"); b.className="category-btn"; b.innerText=c;
-    b.onclick=()=>displayLessons(c); catDiv.appendChild(b);
-  });
+function updateCategories(){ 
+    const catDiv=document.getElementById("categories"); catDiv.innerHTML=""; 
+    let cats=[...new Set(lessons.map(l=>l.kategori))]; 
+    cats.forEach(c=>{ 
+        let b=document.createElement("button"); 
+        b.className="category-btn"; 
+        b.innerText=c; 
+        b.onclick=()=>displayLessons(c); 
+        catDiv.appendChild(b); 
+    }); 
 }
 
-function displayLessons(cat){
-  const list=document.getElementById("lessonsList"); list.innerHTML="";
-  lessons.filter(l=>l.kategori===cat).forEach(l=>{
-    let div=document.createElement("div"); div.className="lesson";
-    div.innerHTML=`<span onclick="alert('Ders: ${l.isim}')">${l.isim}</span>
-    <button onclick="alert('PDF satın al: ${l.pdf}')">PDF Satın Al</button>`;
-    list.appendChild(div);
-  });
+function displayLessons(cat){ 
+    const list=document.getElementById("lessonsList"); 
+    list.innerHTML=""; 
+    lessons.filter(l=>l.kategori===cat).forEach(l=>{ 
+        let div=document.createElement("div"); 
+        div.className="lesson"; 
+        div.innerHTML=`<span onclick="alert('Ders: ${l.isim}')">${l.isim}</span>
+        <button onclick="alert('PDF satın al: ${l.pdf}')">PDF Satın Al</button>`; 
+        list.appendChild(div); 
+    }); 
 }
 
 // Admin
 const ADMIN_PASS="2332";
 function loginAdmin(){
-  const val=document.getElementById("adminPass").value;
-  if(val===ADMIN_PASS){
-    document.getElementById("loginResult").style.color="green";
-    document.getElementById("loginResult").innerText="✅ Giriş başarılı!";
-    document.getElementById("lessonAdd").style.display="block";
-  } else {
-    document.getElementById("loginResult").style.color="red";
-    document.getElementById("loginResult").innerText="❌ Hatalı şifre!";
-  }
+    const val=document.getElementById("adminPass").value;
+    if(val===ADMIN_PASS){
+        document.getElementById("loginResult").style.color="lime";
+        document.getElementById("loginResult").innerText="✅ Giriş başarılı!";
+        document.getElementById("lessonAdd").style.display="block";
+    } else {
+        document.getElementById("loginResult").style.color="red";
+        document.getElementById("loginResult").innerText="❌ Hatalı şifre!";
+    }
 }
 
 function addLesson(){
-  const name=document.getElementById("lessonName").value.trim();
-  const cat=document.getElementById("lessonCategory").value;
-  const pdf=document.getElementById("lessonPDF").value.trim();
-  if(!name||!pdf)return alert("Lütfen ders adı ve PDF girin");
-  lessons.push({kategori:cat,isim:name,pdf:pdf});
-  updateCategories(); alert("Ders eklendi!"); displayLessons(cat);
+    const name=document.getElementById("lessonName").value.trim();
+    const cat=document.getElementById("lessonCategory").value;
+    const pdf=document.getElementById("lessonPDF").value.trim();
+    if(!name||!pdf)return alert("Lütfen ders adı ve PDF girin");
+    lessons.push({kategori:cat,isim:name,pdf:pdf});
+    updateCategories(); alert("Ders eklendi!"); displayLessons(cat);
 }
 
 // İlk kategorileri göster
