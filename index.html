@@ -5,23 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YAZILIMCI</title>
 <style>
-body { font-family: Arial,sans-serif; margin:0; background: linear-gradient(to bottom right,#74ebd5,#ACB6E5); color:#333; }
-header { background: linear-gradient(90deg,#9C27B0,#2196F3); color:white; padding:15px; text-align:center; font-size:22px; font-weight:bold; }
-.container { max-width:900px; margin:20px auto; background:rgba(255,255,255,0.95); border-radius:10px; padding:20px; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
-h2 { margin-top:0; color:#3f51b5; }
-button { padding:8px 14px; border:none; border-radius:5px; cursor:pointer; margin:5px; }
-.sınıf-btn { background:#2196F3; color:white; padding:8px 12px; border:none; border-radius:5px; margin:3px; cursor:pointer; }
-.sınıf-btn:hover { background:#1976D2; }
-.lesson { display:flex; justify-content:space-between; align-items:center; margin:5px 0; padding:5px 0; border-bottom:1px solid #ccc;}
-.lesson span { cursor:pointer; text-decoration:underline; color:#333;}
-.lesson span:hover { color:#2196F3;}
-.info-box { background:#f0f4ff; border:1px solid #c5cae9; padding:15px; border-radius:8px; margin-bottom:20px; }
-.iban-box, .email-box { display:flex; justify-content:space-between; align-items:center; background:#e8eaf6; padding:10px; border-radius:6px; margin:8px 0; }
-.admin-box { background:#fff3e0; border:1px solid #ffcc80; padding:15px; border-radius:8px; margin-bottom:20px; }
-input[type="password"], input[type="text"], select { padding:8px; border-radius:5px; border:1px solid #ccc; margin-right:10px; }
-footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; color:white; border-radius:0 0 10px 10px; }
-/* Bölümler gizleme/gösterme */
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; background: linear-gradient(to right, #4facfe, #00f2fe); color:#333; }
+header { background: linear-gradient(90deg,#6a11cb,#2575fc); color:white; padding:20px; text-align:center; font-size:26px; font-weight:bold; text-shadow:1px 1px 2px #000; }
+.container { max-width: 1000px; margin: 20px auto; padding:20px; background: rgba(255,255,255,0.95); border-radius:15px; box-shadow:0 8px 16px rgba(0,0,0,0.2); }
+h2 { color:#2575fc; }
+button, .sınıf-btn { cursor:pointer; transition: all 0.3s ease; }
+button:hover, .sınıf-btn:hover { transform: scale(1.05); }
 .section { display:none; }
+button { padding:10px 18px; border:none; border-radius:8px; background:#6a11cb; color:white; font-weight:bold; margin:5px; }
+.sınıf-btn { background:#2575fc; color:white; padding:10px 15px; border-radius:8px; margin:5px; font-weight:bold; }
+.sınıf-btn:hover { background:#1a5fcc; }
+.lesson { display:flex; justify-content:space-between; align-items:center; padding:10px; margin:5px 0; background:#f0f4ff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+.lesson span { cursor:pointer; font-weight:bold; color:#333; text-decoration:underline; }
+.lesson span:hover { color:#2575fc; }
+.info-box { padding:15px; border-radius:10px; margin-bottom:20px; background:#e0f7fa; }
+input, select { padding:8px; border-radius:5px; border:1px solid #ccc; margin-right:10px; }
+.admin-box { background:#fff3e0; border:1px solid #ffcc80; padding:15px; border-radius:10px; margin-bottom:20px; }
+footer { text-align:center; padding:15px; margin-top:20px; background:#2575fc; color:white; border-radius:0 0 15px 15px; font-weight:bold; }
 </style>
 </head>
 <body>
@@ -33,7 +33,7 @@ footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; c
 <!-- Ana Sayfa -->
 <div id="homeSection" class="section" style="display:block; text-align:center;">
 <h2>Hoşgeldiniz!</h2>
-<p>Ders Portalımıza hoşgeldiniz. Dersleri görüntülemek için aşağıya tıklayın.</p>
+<p>Ders Portalımıza hoşgeldiniz. Dersleri görüntülemek veya admin girişi yapmak için aşağıya tıklayın.</p>
 <button onclick="showSection('lessonsSection')">Derslere Git</button>
 <button onclick="showSection('adminSection')">Admin Girişi</button>
 </div>
@@ -47,11 +47,11 @@ footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; c
 
 <h2>💳 Satın Alma & İletişim</h2>
 <div class="info-box">
-<div class="iban-box">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
 <span><b>IBAN:</b> <span id="iban">TR98000670100000022363236</span></span>
 <button onclick="copyIban()">Kopyala</button>
 </div>
-<div class="email-box">
+<div style="display:flex; justify-content:space-between; align-items:center;">
 <span><b>E-posta:</b> <span id="email">kodmekanizma.muh@gmail.com</span></span>
 </div>
 <small>Ödeme açıklamasına lütfen <i>ad-soyad + satın alınan PDF adı</i> yazınız.</small>
@@ -81,7 +81,6 @@ footer { text-align:center; padding:15px; margin-top:20px; background:#673AB7; c
 </div>
 <button onclick="showSection('homeSection')">← Ana Sayfaya Dön</button>
 </div>
-
 </div>
 
 </div>
@@ -164,27 +163,4 @@ function displayLessons(category){
     <button onclick="buyPDF('${lesson.pdf}')">PDF Satın Al</button>`;
     list.appendChild(div);
   });
-}
-
-// PDF satın alma
-function buyPDF(pdf){
-  const iban=document.getElementById("iban").innerText;
-  const email=document.getElementById("email").innerText;
-  alert(`Ödeme için IBAN: ${iban}\nE-posta: ${email}\nSatın almak istediğiniz PDF: ${pdf}`);
-}
-
-// Ders çalış
-function viewLesson(name, category){
-  alert(`${category} - ${name} ders içeriği burada gösterilebilir.`);
-}
-
-// Admin ders ekleme
-function addLesson(){
-  const name=document.getElementById("lessonName").value.trim();
-  const cat=document.getElementById("lessonCategory").value;
-  const pdf=document.getElementById("lessonPDF").value.trim();
-  if(!name||!pdf)return alert("Lütfen ders adı ve PDF dosya adını girin.");
-  lessons.push({kategori:cat,isim:name,pdf:pdf});
-  updateCategories();
-  displayLessons
 
