@@ -11,10 +11,9 @@ header { text-align:center; font-size:36px; font-weight:700; padding:30px; text-
 @keyframes glow { from {text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 30px #0ff;} to {text-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;} }
 .container { max-width:1200px; margin:20px auto; padding:20px; background: rgba(0,0,0,0.6); border-radius:20px; box-shadow:0 0 30px rgba(0,255,255,0.2);}
 h2 { color:#0ff; text-shadow:0 0 10px #0ff; }
-button, .category-btn { cursor:pointer; transition: all 0.3s ease; border:none; border-radius:12px; font-weight:700; }
-button:hover, .category-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow:0 0 20px #0ff,0 0 40px #0ff; }
-button, .category-btn { padding:12px 22px; margin:6px; background: linear-gradient(90deg,#0ff,#0ff,#0ff); color:#000; text-shadow:none; animation: float 3s ease-in-out infinite;}
-@keyframes float { 0%,100% {transform: translateY(0);} 50% {transform: translateY(-6px);} }
+button, .category-btn { cursor:pointer; transition: all 0.3s ease; border:none; border-radius:12px; font-weight:700; color:#000; background: linear-gradient(90deg,#0ff,#0ff,#0ff); padding:12px 22px; margin:6px; animation: float 3s ease-in-out infinite; text-shadow: 0 0 5px #0ff; }
+button:hover, .category-btn:hover { transform: translateY(-6px) scale(1.1); box-shadow:0 0 20px #0ff,0 0 40px #0ff,0 0 60px #0ff;}
+@keyframes float { 0%,100% {transform: translateY(0);} 50% {transform: translateY(-8px);} }
 .section { display:none; }
 .lesson { display:flex; justify-content:space-between; align-items:center; padding:12px; margin:8px 0; background:rgba(0,255,255,0.1); border-radius:12px; box-shadow:0 0 10px #0ff; transition:0.3s; }
 .lesson span { cursor:pointer; font-weight:600; color:#0ff; text-decoration:underline; }
@@ -138,23 +137,4 @@ function loginAdmin(){
         document.getElementById("loginResult").innerText="✅ Giriş başarılı!";
         document.getElementById("lessonAdd").style.display="block";
     } else {
-        document.getElementById("loginResult").style.color="red";
-        document.getElementById("loginResult").innerText="❌ Hatalı şifre!";
-    }
-}
-
-function addLesson(){
-    const name=document.getElementById("lessonName").value.trim();
-    const cat=document.getElementById("lessonCategory").value;
-    const pdf=document.getElementById("lessonPDF").value.trim();
-    if(!name||!pdf)return alert("Lütfen ders adı ve PDF girin");
-    lessons.push({kategori:cat,isim:name,pdf:pdf});
-    updateCategories(); alert("Ders eklendi!"); displayLessons(cat);
-}
-
-// İlk kategorileri göster
-updateCategories();
-</script>
-
-</body>
-</html>
+        document.getElementById("
