@@ -5,23 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YAZILIMCI</title>
 <style>
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; background: linear-gradient(to right, #4facfe, #00f2fe); color:#333; }
-header { background: linear-gradient(90deg,#6a11cb,#2575fc); color:white; padding:20px; text-align:center; font-size:26px; font-weight:bold; text-shadow:1px 1px 2px #000; }
-.container { max-width: 1000px; margin: 20px auto; padding:20px; background: rgba(255,255,255,0.95); border-radius:15px; box-shadow:0 8px 16px rgba(0,0,0,0.2); }
-h2 { color:#2575fc; }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+body { font-family: 'Montserrat', sans-serif; margin:0; background: linear-gradient(135deg,#74ebd5,#ACB6E5); color:#333; }
+header { background: linear-gradient(90deg,#6a11cb,#2575fc); color:white; padding:25px; text-align:center; font-size:28px; font-weight:700; text-shadow:2px 2px 4px #000; }
+.container { max-width: 1100px; margin: 20px auto; padding:25px; background: rgba(255,255,255,0.95); border-radius:20px; box-shadow:0 12px 24px rgba(0,0,0,0.2); }
+h2 { color:#2575fc; margin-top:0; }
 button, .sınıf-btn { cursor:pointer; transition: all 0.3s ease; }
-button:hover, .sınıf-btn:hover { transform: scale(1.05); }
+button:hover, .sınıf-btn:hover { transform: scale(1.05); box-shadow:0 4px 12px rgba(0,0,0,0.2);}
 .section { display:none; }
-button { padding:10px 18px; border:none; border-radius:8px; background:#6a11cb; color:white; font-weight:bold; margin:5px; }
-.sınıf-btn { background:#2575fc; color:white; padding:10px 15px; border-radius:8px; margin:5px; font-weight:bold; }
-.sınıf-btn:hover { background:#1a5fcc; }
-.lesson { display:flex; justify-content:space-between; align-items:center; padding:10px; margin:5px 0; background:#f0f4ff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-.lesson span { cursor:pointer; font-weight:bold; color:#333; text-decoration:underline; }
+button { padding:12px 20px; border:none; border-radius:10px; background:#6a11cb; color:white; font-weight:700; margin:5px; font-size:16px; }
+.sınıf-btn { background:#2575fc; color:white; padding:12px 18px; border-radius:10px; margin:5px; font-weight:700; font-size:15px; }
+.lesson { display:flex; justify-content:space-between; align-items:center; padding:12px; margin:8px 0; background:#f0f4ff; border-radius:12px; box-shadow:0 3px 8px rgba(0,0,0,0.1); transition:0.3s;}
+.lesson span { cursor:pointer; font-weight:600; color:#333; text-decoration:underline; }
 .lesson span:hover { color:#2575fc; }
-.info-box { padding:15px; border-radius:10px; margin-bottom:20px; background:#e0f7fa; }
-input, select { padding:8px; border-radius:5px; border:1px solid #ccc; margin-right:10px; }
-.admin-box { background:#fff3e0; border:1px solid #ffcc80; padding:15px; border-radius:10px; margin-bottom:20px; }
-footer { text-align:center; padding:15px; margin-top:20px; background:#2575fc; color:white; border-radius:0 0 15px 15px; font-weight:bold; }
+.info-box { padding:18px; border-radius:12px; margin-bottom:25px; background:#e0f7fa; box-shadow:0 3px 8px rgba(0,0,0,0.1);}
+input, select { padding:10px; border-radius:8px; border:1px solid #ccc; margin-right:10px; font-size:14px; }
+.admin-box { background:#fff3e0; border:1px solid #ffcc80; padding:18px; border-radius:12px; margin-bottom:25px; box-shadow:0 3px 8px rgba(0,0,0,0.1);}
+footer { text-align:center; padding:20px; margin-top:30px; background:#2575fc; color:white; border-radius:0 0 20px 20px; font-weight:700; font-size:15px;}
+@media (max-width:768px){ .lesson { flex-direction:column; align-items:flex-start; } .sınıf-btn, button{ width:100%; margin:6px 0; } input, select{ width:100%; margin:6px 0; }}
 </style>
 </head>
 <body>
@@ -33,7 +34,7 @@ footer { text-align:center; padding:15px; margin-top:20px; background:#2575fc; c
 <!-- Ana Sayfa -->
 <div id="homeSection" class="section" style="display:block; text-align:center;">
 <h2>Hoşgeldiniz!</h2>
-<p>Ders Portalımıza hoşgeldiniz. Dersleri görüntülemek veya admin girişi yapmak için aşağıya tıklayın.</p>
+<p>Ders Portalımıza hoşgeldiniz. Dersleri görüntülemek veya admin girişi yapmak için aşağıdaki butonları kullanın.</p>
 <button onclick="showSection('lessonsSection')">Derslere Git</button>
 <button onclick="showSection('adminSection')">Admin Girişi</button>
 </div>
@@ -66,7 +67,7 @@ footer { text-align:center; padding:15px; margin-top:20px; background:#2575fc; c
 <button onclick="login()">Giriş Yap</button>
 <p id="loginResult" style="color:red;"></p>
 
-<div id="lessonInputContainer" style="display:none; margin-top:10px;">
+<div id="lessonInputContainer" style="display:none; margin-top:15px;">
 <input type="text" id="lessonName" placeholder="Ders adı">
 <select id="lessonCategory">
 <option value="9. Sınıf">9. Sınıf</option>
@@ -106,7 +107,7 @@ function login(){
   const pass=document.getElementById("adminPass").value;
   if(pass===ADMIN_PASS){
     document.getElementById("loginResult").style.color="green";
-    document.getElementById("loginResult").innerText="✅ Giriş başarılı! Ders ekleyebilirsiniz.";
+    document.getElementById("loginResult").innerText="✅ Giriş başarılı! Ders ekleme aktif.";
     document.getElementById("lessonInputContainer").style.display="block";
   } else {
     document.getElementById("loginResult").style.color="red";
@@ -114,7 +115,7 @@ function login(){
   }
 }
 
-// Ders listesi
+// Ders listesi ve kategoriler
 let lessons=[
 {kategori:"9. Sınıf", isim:"Matematik", pdf:"matematik9.pdf"},
 {kategori:"9. Sınıf", isim:"Fizik", pdf:"fizik9.pdf"},
@@ -127,40 +128,5 @@ let lessons=[
 {kategori:"11. Sınıf", isim:"Matematik", pdf:"matematik11.pdf"},
 {kategori:"11. Sınıf", isim:"Fizik", pdf:"fizik11.pdf"},
 {kategori:"11. Sınıf", isim:"Kimya", pdf:"kimya11.pdf"},
-{kategori:"11. Sınıf", isim:"Biyoloji", pdf:"biyoloji11.pdf"},
-{kategori:"12. Sınıf", isim:"Matematik", pdf:"matematik12.pdf"},
-{kategori:"12. Sınıf", isim:"Fizik", pdf:"fizik12.pdf"},
-{kategori:"12. Sınıf", isim:"Kimya", pdf:"kimya12.pdf"},
-{kategori:"12. Sınıf", isim:"Biyoloji", pdf:"biyoloji12.pdf"},
-{kategori:"Yazılım", isim:"Python", pdf:"python.pdf"},
-{kategori:"Yazılım", isim:"Java", pdf:"java.pdf"},
-{kategori:"Office", isim:"Excel", pdf:"excel.pdf"},
-{kategori:"Office", isim:"Word", pdf:"word.pdf"}
-];
-
-let categories=[];
-
-function updateCategories(){
-  const catDiv=document.getElementById("categoryButtons");
-  catDiv.innerHTML="";
-  categories=[...new Set(lessons.map(l=>l.kategori))];
-  categories.forEach(cat=>{
-    const btn=document.createElement("button");
-    btn.className="sınıf-btn";
-    btn.innerText=cat;
-    btn.onclick=()=>displayLessons(cat);
-    catDiv.appendChild(btn);
-  });
-}
-
-function displayLessons(category){
-  const list=document.getElementById("lessonsList");
-  list.innerHTML="";
-  lessons.filter(l=>l.kategori===category).forEach(lesson=>{
-    const div=document.createElement("div");
-    div.className="lesson";
-    div.innerHTML=`<span onclick="viewLesson('${lesson.isim}','${lesson.kategori}')">${lesson.isim}</span>
-    <button onclick="buyPDF('${lesson.pdf}')">PDF Satın Al</button>`;
-    list.appendChild(div);
-  });
+{kategori:"11. Sınıf", isim
 
